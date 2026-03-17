@@ -22,8 +22,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/:topic" element={<TopicPage />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
