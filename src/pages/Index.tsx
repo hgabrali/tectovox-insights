@@ -57,7 +57,7 @@ const Index = () => {
                       Explore Today's Briefing <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="border-hero-card-border text-hero-foreground hover:bg-hero-card hover:text-hero-foreground">
+                  <Button asChild variant="outline" size="lg" className="border-hero-foreground/30 bg-transparent text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground">
                     <Link to="/archive">Browse Archive</Link>
                   </Button>
                 </div>
