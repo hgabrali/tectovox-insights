@@ -4,8 +4,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { categoryConfig, type Category } from "@/lib/data";
-import { mockArticles } from "@/lib/mock-data";
+import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
+import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 
 const TopicPage = () => {
   const { topic } = useParams<{ topic: string }>();
@@ -27,7 +28,9 @@ const TopicPage = () => {
   }
 
   const Icon = config.icon;
-  const articles = applyFilters(mockArticles, category);
+
+  const { data: items = [], isLoading, isError, refetch } = useItems({ category });
+  const articles = applyFilters(items, category);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -53,15 +56,20 @@ const TopicPage = () => {
 
         {/* Articles */}
         <section className="container pb-16">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article, i) => (
-              <div key={article.id} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
-                <ArticleCard article={article} />
-              </div>
-            ))}
-          </div>
-          {articles.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">No articles match your filters.</p>
+          {isLoading ? (
+            <ArticleGridSkeleton />
+          ) : isError ? (
+            <ErrorState onRetry={() => refetch()} />
+          ) : articles.length === 0 ? (
+            <EmptyState message="No articles match your filters." />
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {articles.map((article, i) => (
+                <div key={article.id} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
+                  <ArticleCard article={article} />
+                </div>
+              ))}
+            </div>
           )}
         </section>
       </main>

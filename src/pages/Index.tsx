@@ -3,17 +3,21 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { categoryConfig } from "@/lib/data";
-import { mockArticles } from "@/lib/mock-data";
+import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
+import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
-  const topStory = mockArticles[0];
-  const trending = mockArticles.filter((a) => a.trending);
-  const filtered = applyFilters(mockArticles.slice(1));
+  const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20 });
+
+  const topStory = allItems[0];
+  const trending = allItems.filter((a) => a.trending);
+  const filtered = applyFilters(allItems.slice(1));
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -27,86 +31,84 @@ const Index = () => {
               <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
               Daily Briefing — {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
             </div>
-            <div className="grid gap-8 lg:grid-cols-5">
-              <div className="lg:col-span-3">
-                {topStory.isBriefing ? (
-                <Link to={`/article/${topStory.id}`} className="group">
-                  <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
-                    {topStory.title}
-                  </h1>
-                  <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
-                    {topStory.excerpt}
-                  </p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                    Read full briefing <ArrowRight className="h-4 w-4" />
-                  </div>
-                </Link>
-                ) : (
-                <a href={topStory.sourceUrl} target="_blank" rel="noopener noreferrer" className="group">
-                  <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
-                    {topStory.title}
-                  </h1>
-                  <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
-                    {topStory.excerpt}
-                  </p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                    Read at source <ArrowRight className="h-4 w-4" />
-                  </div>
-                </a>
-                )}
+            {isLoading ? (
+              <div className="space-y-4">
+                <Skeleton className="h-12 w-3/4" />
+                <Skeleton className="h-6 w-1/2" />
+                <Skeleton className="h-4 w-32" />
               </div>
-
-              {/* Trending sidebar */}
-              <aside className="lg:col-span-2 lg:border-l lg:pl-8">
-                <h3 className="font-display text-sm font-semibold flex items-center gap-2 mb-4 text-muted-foreground">
-                  <TrendingUp className="h-4 w-4" /> Trending Now
-                </h3>
-                <div className="flex flex-col gap-4">
-                  {trending.map((article, i) => {
-                    const config = categoryConfig[article.category];
-                    return article.isBriefing ? (
-                        <Link
-                          key={article.id}
-                          to={`/article/${article.id}`}
-                          className="group flex gap-3"
-                        >
-                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <div>
-                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
-                              {config.label}
-                            </span>
-                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
-                              {article.title}
-                            </h4>
-                          </div>
-                        </Link>
-                      ) : (
-                        <a
-                          key={article.id}
-                          href={article.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group flex gap-3"
-                        >
-                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <div>
-                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
-                              {config.label}
-                            </span>
-                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
-                              {article.title}
-                            </h4>
-                          </div>
-                        </a>
-                      );
-                  })}
+            ) : isError ? (
+              <ErrorState onRetry={() => refetch()} />
+            ) : !topStory ? (
+              <EmptyState message="No briefings yet" />
+            ) : (
+              <div className="grid gap-8 lg:grid-cols-5">
+                <div className="lg:col-span-3">
+                  {topStory.isBriefing ? (
+                    <Link to={`/article/${topStory.id}`} className="group">
+                      <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
+                        {topStory.title}
+                      </h1>
+                      <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+                        {topStory.excerpt}
+                      </p>
+                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                        Read full briefing <ArrowRight className="h-4 w-4" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <a href={topStory.sourceUrl} target="_blank" rel="noopener noreferrer" className="group">
+                      <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
+                        {topStory.title}
+                      </h1>
+                      <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+                        {topStory.excerpt}
+                      </p>
+                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                        Read at source <ArrowRight className="h-4 w-4" />
+                      </div>
+                    </a>
+                  )}
                 </div>
-              </aside>
-            </div>
+
+                {/* Trending sidebar */}
+                <aside className="lg:col-span-2 lg:border-l lg:pl-8">
+                  <h3 className="font-display text-sm font-semibold flex items-center gap-2 mb-4 text-muted-foreground">
+                    <TrendingUp className="h-4 w-4" /> Trending Now
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    {trending.map((article, i) => {
+                      const config = categoryConfig[article.category];
+                      const Wrapper = article.isBriefing
+                        ? ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
+                            <Link to={`/article/${article.id}`} className={cn}>{children}</Link>
+                          )
+                        : ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
+                            <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className={cn}>{children}</a>
+                          );
+                      return (
+                        <Wrapper key={article.id} className="group flex gap-3">
+                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div>
+                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
+                              {config.label}
+                            </span>
+                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
+                              {article.title}
+                            </h4>
+                          </div>
+                        </Wrapper>
+                      );
+                    })}
+                    {trending.length === 0 && (
+                      <p className="text-xs text-muted-foreground">No trending items</p>
+                    )}
+                  </div>
+                </aside>
+              </div>
+            )}
           </div>
         </section>
 
@@ -135,16 +137,23 @@ const Index = () => {
         <section className="container py-12">
           <h2 className="font-display text-2xl font-bold mb-6">Latest Updates</h2>
           <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} showCategoryFilter />
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((article, i) => (
-              <div key={article.id} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
-                <ArticleCard article={article} />
+          <div className="mt-8">
+            {isLoading ? (
+              <ArticleGridSkeleton />
+            ) : isError ? (
+              <ErrorState onRetry={() => refetch()} />
+            ) : filtered.length === 0 ? (
+              <EmptyState message="No articles match your filters." />
+            ) : (
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {filtered.map((article, i) => (
+                  <div key={article.id} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
+                    <ArticleCard article={article} />
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-          {filtered.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">No articles match your filters.</p>
-          )}
         </section>
 
         {/* LinkedIn CTA */}
