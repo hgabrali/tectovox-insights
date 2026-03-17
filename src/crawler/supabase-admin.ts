@@ -1,7 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const supabaseUrl = (globalThis as Record<string, unknown>).process
+  ? (globalThis as Record<string, unknown> & { process: { env: Record<string, string> } }).process.env.SUPABASE_URL
+  : undefined;
+const supabaseServiceRoleKey = (globalThis as Record<string, unknown>).process
+  ? (globalThis as Record<string, unknown> & { process: { env: Record<string, string> } }).process.env.SUPABASE_SERVICE_ROLE_KEY
+  : undefined;
 
 if (!supabaseUrl || !supabaseServiceRoleKey) {
   throw new Error(
