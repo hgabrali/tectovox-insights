@@ -9,7 +9,7 @@ import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/Conten
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import MascotFloat from "@/components/MascotFloat";
+import mascotImg from "@/assets/mascot.jpg";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
@@ -35,7 +35,14 @@ const Index = () => {
             {dateStr}
           </p>
           <h1 className="mt-4 font-display text-5xl font-black leading-[1.08] md:text-7xl lg:text-[80px]">
-            Tech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
+            <span className="relative inline-block">
+              <img
+                src={mascotImg}
+                alt="tectovox mascot"
+                className="absolute -top-[60px] left-[2px] h-[56px] w-[56px] md:-top-[80px] md:left-[4px] md:h-[72px] md:w-[72px] lg:-top-[90px] lg:h-[80px] lg:w-[80px] animate-mascot-bounce rounded-full object-cover hidden md:block pointer-events-auto cursor-pointer z-10"
+              />
+              T
+            </span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
           </h1>
           <div className="mt-8 h-px bg-border" />
         </section>
@@ -104,7 +111,6 @@ const Index = () => {
       </main>
 
       <SiteFooter />
-      <MascotFloat />
     </div>
   );
 };
