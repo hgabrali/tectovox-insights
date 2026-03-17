@@ -97,16 +97,20 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Content Grid */}
+        {/* Filters + Content Grid */}
         <section className="container py-12">
-          <h2 className="font-display text-2xl font-bold mb-8">Latest Updates</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {latest.map((article, i) => (
+          <h2 className="font-display text-2xl font-bold mb-6">Latest Updates</h2>
+          <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} showCategoryFilter />
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((article, i) => (
               <div key={article.id} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
                 <ArticleCard article={article} />
               </div>
             ))}
           </div>
+          {filtered.length === 0 && (
+            <p className="text-center text-muted-foreground py-12">No articles match your filters.</p>
+          )}
         </section>
 
         {/* Newsletter CTA */}
