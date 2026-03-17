@@ -62,6 +62,13 @@ export default {
         communication: "hsl(var(--communication))",
         philosophy: "hsl(var(--philosophy))",
         advertising: "hsl(var(--advertising))",
+        hero: {
+          DEFAULT: "hsl(var(--hero-bg))",
+          foreground: "hsl(var(--hero-foreground))",
+          muted: "hsl(var(--hero-muted))",
+          card: "hsl(var(--hero-card))",
+          "card-border": "hsl(var(--hero-card-border))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
