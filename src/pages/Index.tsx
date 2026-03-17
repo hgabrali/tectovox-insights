@@ -9,7 +9,7 @@ import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/Conten
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import mascotImg from "@/assets/mascot.jpg";
+import mascotImg from "@/assets/mascot.png";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
@@ -35,7 +35,7 @@ const Index = () => {
             <span className="relative inline-block">T<img
                 src={mascotImg}
                 alt="tectovox mascot"
-                className="absolute bottom-[80%] left-1/2 -translate-x-1/2 h-[36px] w-[36px] md:h-[52px] md:w-[52px] lg:h-[64px] lg:w-[64px] object-contain pointer-events-auto cursor-pointer z-10"
+                className="absolute bottom-[65%] left-1/2 -translate-x-1/2 h-[44px] w-[44px] md:h-[64px] md:w-[64px] lg:h-[80px] lg:w-[80px] object-contain pointer-events-auto cursor-pointer z-10"
               /></span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
           </h1>
           <p className="mt-4 text-sm font-medium text-muted-foreground tracking-wide uppercase">
