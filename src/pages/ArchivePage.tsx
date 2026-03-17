@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { mockArticles } from "@/lib/mock-data";
 import { categoryConfig, contentTypeConfig } from "@/lib/data";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { Search, ChevronDown, ChevronRight, Clock, Calendar } from "lucide-react";
+import { Search, ChevronDown, ChevronRight, Clock, Calendar, ExternalLink } from "lucide-react";
 
 const ITEMS_PER_PAGE = 50;
 
