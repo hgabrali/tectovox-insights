@@ -66,6 +66,9 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Top 10 News */}
+        <TopTenNews items={allItems} />
+
         {/* Filters + Content Grid */}
         <section className="container py-12">
           <h2 className="font-display text-3xl font-bold mb-8">Latest</h2>
