@@ -14,8 +14,10 @@ function ArticleLink({ article, children, className }: { article: Article; child
 }
 
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
-  const catConfig = categoryConfig[article.category];
-  const typeConfig = contentTypeConfig[article.contentType];
+  const category = article.category ?? "technology";
+  const contentType = article.contentType ?? "article";
+  const catConfig = categoryConfig[category] ?? categoryConfig.technology;
+  const typeConfig = contentTypeConfig[contentType] ?? contentTypeConfig.article;
   const CatIcon = catConfig.icon;
   const TypeIcon = typeConfig.icon;
 
