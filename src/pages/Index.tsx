@@ -10,7 +10,7 @@ import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/Conten
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import mascotImg from "@/assets/mascot.png";
+import mascotImg from "@/assets/mascot-sitting.png";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
