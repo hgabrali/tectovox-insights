@@ -93,6 +93,5 @@ export function TopTenNews({ items, isLoading = false }: { items: Article[]; isL
       </div>
       )}
     </section>
-    </section>
   );
 }
