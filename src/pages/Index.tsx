@@ -64,8 +64,7 @@ const Index = () => {
                 <div className="flex flex-col gap-4">
                   {trending.map((article, i) => {
                     const config = categoryConfig[article.category];
-                    return (
-                      {article.isBriefing ? (
+                    return article.isBriefing ? (
                         <Link
                           key={article.id}
                           to={`/article/${article.id}`}
