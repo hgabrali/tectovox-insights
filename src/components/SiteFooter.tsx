@@ -3,7 +3,7 @@ import { Linkedin, Twitter, Rss } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-card">
+    <footer className="border-t border-border">
       <div className="container py-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Brand */}
@@ -18,7 +18,7 @@ export function SiteFooter() {
 
           {/* Links */}
           <div className="flex flex-col gap-2">
-            <h4 className="font-display text-sm font-semibold mb-1">Navigation</h4>
+            <h4 className="font-display text-sm font-bold mb-1">Navigation</h4>
             {["Technology", "Media", "Communication", "Philosophy", "Advertising", "About"].map((item) => (
               <Link
                 key={item}
@@ -32,19 +32,19 @@ export function SiteFooter() {
 
           {/* Legal & Social */}
           <div className="flex flex-col gap-2">
-            <h4 className="font-display text-sm font-semibold mb-1">Legal</h4>
+            <h4 className="font-display text-sm font-bold mb-1">Legal</h4>
             <Link to="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link to="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Use</Link>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
             <div className="mt-4 flex gap-3">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin className="h-5 w-5" /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-5 w-5" /></a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Rss className="h-5 w-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Linkedin className="h-5 w-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Twitter className="h-5 w-5" /></a>
+              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors"><Rss className="h-5 w-5" /></a>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 border-t pt-6 text-center text-xs text-muted-foreground">
+        <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} tectovox.com — All rights reserved.
         </div>
       </div>

@@ -1,6 +1,22 @@
 import { Link } from "react-router-dom";
-import { categoryConfig, contentTypeConfig, type Article } from "@/lib/data";
-import { Clock, Play, ExternalLink } from "lucide-react";
+import { categoryConfig, contentTypeConfig, type Article, type Category } from "@/lib/data";
+import { Clock, ExternalLink } from "lucide-react";
+
+const categoryInitials: Record<Category, string> = {
+  technology: "T",
+  media: "M",
+  communication: "C",
+  philosophy: "P",
+  advertising: "A",
+};
+
+const categoryBgClass: Record<Category, string> = {
+  technology: "bg-tech",
+  media: "bg-media",
+  communication: "bg-communication",
+  philosophy: "bg-philosophy",
+  advertising: "bg-advertising",
+};
 
 function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {
   if (article.isBriefing) {
@@ -14,64 +30,30 @@ function ArticleLink({ article, children, className }: { article: Article; child
 }
 
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
-  console.log("[ArticleCard] article prop:", article);
   const category = article.category ?? "technology";
   const contentType = article.contentType ?? "article";
   const catConfig = categoryConfig[category] ?? categoryConfig.technology;
   const typeConfig = contentTypeConfig[contentType] ?? contentTypeConfig.article;
-  const CatIcon = catConfig.icon;
   const TypeIcon = typeConfig.icon;
+  const initial = categoryInitials[category] ?? "T";
+  const bgClass = categoryBgClass[category] ?? "bg-tech";
 
   return (
     <ArticleLink
       article={article}
-      className={`group block rounded-lg border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5 ${
+      className={`group block rounded-lg border border-border bg-card transition-colors hover:border-foreground/20 ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
-      {/* Thumbnail area with content-type overlay */}
-      <div className={`relative flex items-center justify-center rounded-t-lg ${featured ? "h-48" : "h-32"} bg-muted/50`}>
-        <CatIcon className="h-10 w-10 text-muted-foreground/30 transition-colors group-hover:text-primary/50" />
-
-        {/* Video play overlay */}
-        {article.contentType === "video" && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-destructive/90 text-destructive-foreground shadow-lg transition-transform group-hover:scale-110">
-              <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
-            </div>
-          </div>
-        )}
-
-        {/* Podcast waveform overlay */}
-        {article.contentType === "podcast" && (
-          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-center gap-[3px] h-6 opacity-40 group-hover:opacity-60 transition-opacity">
-            {Array.from({ length: 24 }).map((_, i) => (
-              <div
-                key={i}
-                className="w-[3px] rounded-full bg-accent"
-                style={{ height: `${Math.max(4, Math.sin(i * 0.7) * 16 + Math.random() * 8 + 6)}px` }}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Book icon overlay */}
-        {article.contentType === "book" && (
-          <div className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-md bg-philosophy/20 text-philosophy">
-            <TypeIcon className="h-4 w-4" />
-          </div>
-        )}
-
-        {/* External link indicator */}
-        {!article.isBriefing && (
-          <div className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-            <ExternalLink className="h-3 w-3" />
-          </div>
-        )}
+      {/* Colored initial block */}
+      <div className={`flex items-center justify-center rounded-t-lg ${bgClass} ${featured ? "h-40" : "h-28"}`}>
+        <span className="text-5xl font-display font-black text-primary-foreground select-none">
+          {initial}
+        </span>
       </div>
 
       <div className="p-5">
-        {/* Badge row: category + content type */}
+        {/* Badge row */}
         <div className="flex flex-wrap items-center gap-2">
           <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${catConfig.color}`}>
             {catConfig.label}
@@ -82,8 +64,8 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
           </span>
         </div>
 
-        <h3 className={`mt-3 font-display font-semibold leading-snug transition-colors group-hover:text-primary ${
-          featured ? "text-xl" : "text-base"
+        <h3 className={`mt-3 font-display font-bold leading-snug transition-colors group-hover:text-primary ${
+          featured ? "text-xl" : "text-lg"
         }`}>
           {article.title}
         </h3>
@@ -99,7 +81,7 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
             {article.readTime}
           </span>
           {!article.isBriefing && (
-            <span className="flex items-center gap-1 text-primary/60">
+            <span className="flex items-center gap-1 text-muted-foreground/60">
               <ExternalLink className="h-3 w-3" />
               Source
             </span>

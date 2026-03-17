@@ -9,7 +9,7 @@ export default {
       center: true,
       padding: "1.5rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1280px",
       },
     },
     extend: {
@@ -62,13 +62,6 @@ export default {
         communication: "hsl(var(--communication))",
         philosophy: "hsl(var(--philosophy))",
         advertising: "hsl(var(--advertising))",
-        hero: {
-          DEFAULT: "hsl(var(--hero-bg))",
-          foreground: "hsl(var(--hero-foreground))",
-          muted: "hsl(var(--hero-muted))",
-          card: "hsl(var(--hero-card))",
-          "card-border": "hsl(var(--hero-card-border))",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,7 +73,7 @@ export default {
         "card-hover": "var(--card-shadow-hover)",
       },
       fontFamily: {
-        display: ["Space Grotesk", "sans-serif"],
+        display: ["Playfair Display", "serif"],
         body: ["Inter", "sans-serif"],
       },
       keyframes: {

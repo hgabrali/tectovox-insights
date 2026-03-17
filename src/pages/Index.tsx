@@ -7,106 +7,41 @@ import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
-import { ArrowRight, Linkedin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20 });
 
-  const recentThree = allItems.slice(0, 3);
   const filtered = applyFilters(allItems);
+
+  const today = new Date();
+  const dateStr = today.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero */}
-        <section className="relative bg-hero overflow-hidden">
-          {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage:
-                "linear-gradient(hsl(var(--hero-foreground) / 0.15) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--hero-foreground) / 0.15) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-
-          <div className="container relative py-16 md:py-24">
-            <div className="grid gap-12 lg:grid-cols-5 items-center">
-              {/* Left — 60% */}
-              <div className="lg:col-span-3">
-                <div className="flex items-center gap-2 text-sm font-medium text-primary mb-6">
-                  <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  Daily Briefing — {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
-                </div>
-
-                <h1 className="font-display text-3xl font-bold leading-tight text-hero-foreground md:text-[48px] md:leading-[1.15]">
-                  The intersection of technology, media &amp; society
-                </h1>
-
-                <p className="mt-5 text-lg leading-relaxed text-hero-muted max-w-xl">
-                  Curated intelligence across tech, media, communication, philosophy and advertising — updated daily.
-                </p>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Button asChild size="lg">
-                    <Link to="/technology">
-                      Explore Today's Briefing <ArrowRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="border-hero-foreground/30 bg-transparent text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground">
-                    <Link to="/archive">Browse Archive</Link>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Right — 40% mini cards */}
-              <div className="lg:col-span-2 flex flex-col gap-3">
-                {isLoading ? (
-                  Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="rounded-lg border border-hero-card-border bg-hero-card p-4">
-                      <div className="h-4 w-16 rounded-full bg-hero-card-border animate-pulse" />
-                      <div className="mt-3 h-4 w-full rounded bg-hero-card-border/60 animate-pulse" />
-                      <div className="mt-2 h-4 w-2/3 rounded bg-hero-card-border/40 animate-pulse" />
-                    </div>
-                  ))
-                ) : recentThree.length > 0 ? (
-                  recentThree.map((item) => {
-                    const catConfig = categoryConfig[item.category] ?? categoryConfig.technology;
-                    return (
-                      <a
-                        key={item.id}
-                        href={item.isBriefing ? `/article/${item.id}` : item.sourceUrl}
-                        target={item.isBriefing ? undefined : "_blank"}
-                        rel={item.isBriefing ? undefined : "noopener noreferrer"}
-                        className="group rounded-lg border border-hero-card-border bg-hero-card p-4 transition-all hover:border-primary/40 hover:-translate-y-0.5"
-                      >
-                        <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${catConfig.color}`}>
-                          {catConfig.label}
-                        </span>
-                        <h4 className="mt-2 text-sm font-medium leading-snug text-hero-foreground line-clamp-2 transition-colors group-hover:text-primary">
-                          {item.title}
-                        </h4>
-                        <p className="mt-1 text-xs text-hero-muted">{item.author}</p>
-                      </a>
-                    );
-                  })
-                ) : (
-                  <div className="rounded-lg border border-hero-card-border bg-hero-card p-6 text-center">
-                    <p className="text-sm text-hero-muted">No items yet — content will appear here once published.</p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+        {/* Editorial Hero */}
+        <section className="container pt-12 pb-10 md:pt-20 md:pb-14">
+          <p className="text-sm font-medium text-muted-foreground tracking-wide uppercase">
+            {dateStr}
+          </p>
+          <h1 className="mt-4 font-display text-5xl font-black leading-[1.08] md:text-7xl lg:text-[80px]">
+            Tech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
+          </h1>
+          <div className="mt-8 h-px bg-border" />
         </section>
 
         {/* Category Quick Links */}
-        <section className="border-b">
-          <div className="container py-6">
+        <section className="border-b border-border">
+          <div className="container py-5">
             <div className="flex flex-wrap gap-2">
               {Object.entries(categoryConfig).map(([key, val]) => {
                 const Icon = val.icon;
@@ -114,7 +49,7 @@ const Index = () => {
                   <Link
                     key={key}
                     to={`/${key}`}
-                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all hover:-translate-y-0.5 hover:shadow-card ${val.color}`}
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors hover:opacity-80 ${val.color}`}
                   >
                     <Icon className="h-4 w-4" />
                     {val.label}
@@ -127,7 +62,7 @@ const Index = () => {
 
         {/* Filters + Content Grid */}
         <section className="container py-12">
-          <h2 className="font-display text-2xl font-bold mb-6">Latest Updates</h2>
+          <h2 className="font-display text-3xl font-bold mb-8">Latest</h2>
           <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} showCategoryFilter />
           <div className="mt-8">
             {isLoading ? (
@@ -149,11 +84,11 @@ const Index = () => {
         </section>
 
         {/* LinkedIn CTA */}
-        <section className="border-t bg-card">
+        <section className="border-t border-border">
           <div className="container py-16 text-center">
-            <Linkedin className="mx-auto h-8 w-8 text-primary mb-4" />
-            <h2 className="font-display text-2xl font-bold">Stay Informed</h2>
-            <p className="mt-2 text-muted-foreground max-w-md mx-auto">
+            <Linkedin className="mx-auto h-8 w-8 text-muted-foreground mb-4" />
+            <h2 className="font-display text-2xl font-bold">Stay in the loop</h2>
+            <p className="mt-2 text-muted-foreground max-w-md mx-auto text-sm">
               Follow tectovox on LinkedIn for daily briefings at the intersection of tech and society.
             </p>
             <div className="mt-6">
