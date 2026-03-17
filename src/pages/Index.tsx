@@ -1,16 +1,19 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
+import { FilterBar } from "@/components/FilterBar";
 import { categoryConfig } from "@/lib/data";
 import { mockArticles } from "@/lib/mock-data";
+import { useContentFilters } from "@/hooks/use-content-filters";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const topStory = mockArticles[0];
   const trending = mockArticles.filter((a) => a.trending);
-  const latest = mockArticles.slice(1);
+  const filtered = applyFilters(mockArticles.slice(1));
 
   return (
     <div className="min-h-screen flex flex-col">
