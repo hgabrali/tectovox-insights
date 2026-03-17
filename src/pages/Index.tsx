@@ -6,7 +6,7 @@ import { categoryConfig } from "@/lib/data";
 import { mockArticles } from "@/lib/mock-data";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { Link } from "react-router-dom";
-import { ArrowRight, TrendingUp, Mail } from "lucide-react";
+import { ArrowRight, TrendingUp, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
