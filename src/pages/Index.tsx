@@ -147,21 +147,20 @@ const Index = () => {
           )}
         </section>
 
-        {/* Newsletter CTA */}
+        {/* LinkedIn CTA */}
         <section className="border-t bg-card">
           <div className="container py-16 text-center">
-            <Mail className="mx-auto h-8 w-8 text-primary mb-4" />
+            <Linkedin className="mx-auto h-8 w-8 text-primary mb-4" />
             <h2 className="font-display text-2xl font-bold">Stay Informed</h2>
             <p className="mt-2 text-muted-foreground max-w-md mx-auto">
-              Get the daily tectovox briefing delivered to your inbox. No spam, just signal.
+              Follow tectovox on LinkedIn for daily briefings at the intersection of tech and society.
             </p>
-            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 rounded-lg border bg-background px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Button>Subscribe</Button>
+            <div className="mt-6">
+              <Button asChild size="lg">
+                <a href="https://linkedin.com/company/tectovox" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="mr-2 h-4 w-4" /> Follow on LinkedIn
+                </a>
+              </Button>
             </div>
           </div>
         </section>
