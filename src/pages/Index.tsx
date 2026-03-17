@@ -32,14 +32,11 @@ const Index = () => {
         {/* Editorial Hero */}
         <section className="container pt-12 pb-10 md:pt-20 md:pb-14">
           <h1 className="font-display text-5xl font-black leading-[1.08] md:text-7xl lg:text-[80px]">
-            <span className="relative inline-block">
-              <img
+            Tech. Med<span className="relative inline-block"><span className="invisible">i</span><img
                 src={mascotImg}
                 alt="tectovox mascot"
-                className="absolute -top-[50px] left-1/2 -translate-x-1/2 h-[52px] w-[52px] md:-top-[68px] md:h-[64px] md:w-[64px] lg:-top-[76px] lg:h-[72px] lg:w-[72px] rounded-full object-cover hidden md:block pointer-events-auto cursor-pointer z-10"
-              />
-              T
-            </span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[60%] h-[28px] w-[28px] md:h-[40px] md:w-[40px] lg:h-[48px] lg:w-[48px] rounded-full object-cover hidden md:block pointer-events-auto cursor-pointer z-10"
+              /></span>a. <em className="not-italic font-display italic text-primary">Ideas.</em>
           </h1>
           <p className="mt-4 text-sm font-medium text-muted-foreground tracking-wide uppercase">
             {dateStr}
