@@ -2,13 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig } from "@/lib/data";
+import { categoryConfig } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { ArrowLeft, Linkedin, Twitter, Link2, Clock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ArticlePage = () => {
   const { id } = useParams<{ id: string }>();
-  const article = sampleArticles.find((a) => a.id === id);
+  const article = mockArticles.find((a) => a.id === id);
 
   if (!article) {
     return (
@@ -27,7 +28,7 @@ const ArticlePage = () => {
 
   const config = categoryConfig[article.category];
   const Icon = config.icon;
-  const related = sampleArticles.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
+  const related = mockArticles.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
 
   // Generate placeholder body paragraphs
   const bodyParagraphs = [

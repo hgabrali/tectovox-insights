@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig, type Category } from "@/lib/data";
+import { categoryConfig, type Category } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { useState } from "react";
 
 type SortOption = "date" | "relevance";
@@ -27,7 +28,7 @@ const TopicPage = () => {
   }
 
   const Icon = config.icon;
-  const articles = sampleArticles
+  const articles = mockArticles
     .filter((a) => a.category === category)
     .sort((a, b) => (sort === "date" ? new Date(b.date).getTime() - new Date(a.date).getTime() : 0));
 

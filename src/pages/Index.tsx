@@ -1,15 +1,16 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig } from "@/lib/data";
+import { categoryConfig } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  const topStory = sampleArticles[0];
-  const trending = sampleArticles.filter((a) => a.trending);
-  const latest = sampleArticles.slice(1);
+  const topStory = mockArticles[0];
+  const trending = mockArticles.filter((a) => a.trending);
+  const latest = mockArticles.slice(1);
 
   return (
     <div className="min-h-screen flex flex-col">
