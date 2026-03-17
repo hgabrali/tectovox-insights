@@ -75,7 +75,6 @@ export const categoryConfig: Record<Category, { label: string; color: string; ic
   },
 };
 
-export const sampleArticles: Article[] = [
   {
     id: "1",
     title: "The Rise of Autonomous AI Agents in Enterprise Software",
