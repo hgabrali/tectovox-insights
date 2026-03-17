@@ -14,6 +14,7 @@ function ArticleLink({ article, children, className }: { article: Article; child
 }
 
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
+  console.log("[ArticleCard] article prop:", article);
   const category = article.category ?? "technology";
   const contentType = article.contentType ?? "article";
   const catConfig = categoryConfig[category] ?? categoryConfig.technology;

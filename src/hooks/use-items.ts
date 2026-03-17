@@ -63,6 +63,7 @@ export function useItems({ category, limit = 50, offset = 0, search, enabled = t
       query = query.range(offset, offset + limit - 1);
 
       const { data, error } = await query;
+      console.log("[useItems] raw Supabase data:", data);
       if (error) throw error;
       return (data as ItemRow[]).map(rowToArticle);
     },
