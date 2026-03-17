@@ -28,7 +28,7 @@ const TopicPage = () => {
   }
 
   const Icon = config.icon;
-  const articles = sampleArticles
+  const articles = mockArticles
     .filter((a) => a.category === category)
     .sort((a, b) => (sort === "date" ? new Date(b.date).getTime() - new Date(a.date).getTime() : 0));
 

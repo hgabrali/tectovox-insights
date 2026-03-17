@@ -8,9 +8,9 @@ import { ArrowRight, TrendingUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  const topStory = sampleArticles[0];
-  const trending = sampleArticles.filter((a) => a.trending);
-  const latest = sampleArticles.slice(1);
+  const topStory = mockArticles[0];
+  const trending = mockArticles.filter((a) => a.trending);
+  const latest = mockArticles.slice(1);
 
   return (
     <div className="min-h-screen flex flex-col">

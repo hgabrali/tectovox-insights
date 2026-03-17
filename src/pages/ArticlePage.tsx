@@ -28,7 +28,7 @@ const ArticlePage = () => {
 
   const config = categoryConfig[article.category];
   const Icon = config.icon;
-  const related = sampleArticles.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
+  const related = mockArticles.filter((a) => a.category === article.category && a.id !== article.id).slice(0, 3);
 
   // Generate placeholder body paragraphs
   const bodyParagraphs = [
