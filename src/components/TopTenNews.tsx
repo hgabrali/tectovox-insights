@@ -21,10 +21,8 @@ const categoryBorder: Record<Category, string> = {
   advertising: "border-l-advertising",
 };
 
-export function TopTenNews({ items }: { items: Article[] }) {
+export function TopTenNews({ items, isLoading = false }: { items: Article[]; isLoading?: boolean }) {
   const top10 = items.slice(0, 10);
-
-  if (top10.length === 0) return null;
 
   return (
     <section className="container py-12 border-b border-border">
