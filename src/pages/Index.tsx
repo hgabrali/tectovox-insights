@@ -36,7 +36,7 @@ const Index = () => {
               <img
                 src={mascotImg}
                 alt="tectovox mascot"
-                className="absolute -top-[60px] left-[2px] h-[56px] w-[56px] md:-top-[80px] md:left-[4px] md:h-[72px] md:w-[72px] lg:-top-[90px] lg:h-[80px] lg:w-[80px] animate-mascot-bounce rounded-full object-cover hidden md:block pointer-events-auto cursor-pointer z-10"
+                className="absolute -top-[50px] left-1/2 -translate-x-1/2 h-[52px] w-[52px] md:-top-[68px] md:h-[64px] md:w-[64px] lg:-top-[76px] lg:h-[72px] lg:w-[72px] rounded-full object-cover hidden md:block pointer-events-auto cursor-pointer z-10"
               />
               T
             </span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
