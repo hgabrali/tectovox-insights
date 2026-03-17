@@ -13,6 +13,8 @@ export interface Article {
   imageUrl?: string;
   readTime: string;
   trending?: boolean;
+  sourceUrl: string;
+  isBriefing?: boolean;
 }
 
 export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising";
