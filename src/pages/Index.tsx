@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
+import { TopTenNews } from "@/components/TopTenNews";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
@@ -64,6 +65,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Top 10 News */}
+        <TopTenNews items={allItems} />
 
         {/* Filters + Content Grid */}
         <section className="container py-12">
