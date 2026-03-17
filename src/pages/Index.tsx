@@ -7,108 +7,98 @@ import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
-import { ArrowRight, TrendingUp, Linkedin } from "lucide-react";
+import { ArrowRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20 });
 
-  const topStory = allItems[0];
-  const trending = allItems.filter((a) => a.trending);
-  const filtered = applyFilters(allItems.slice(1));
+  const recentThree = allItems.slice(0, 3);
+  const filtered = applyFilters(allItems);
 
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero / Daily Briefing */}
-        <section className="border-b bg-card">
-          <div className="container py-12 md:py-20">
-            <div className="flex items-center gap-2 text-sm text-primary font-medium mb-4">
-              <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
-              Daily Briefing — {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
-            </div>
-            {isLoading ? (
-              <div className="space-y-4">
-                <Skeleton className="h-12 w-3/4" />
-                <Skeleton className="h-6 w-1/2" />
-                <Skeleton className="h-4 w-32" />
-              </div>
-            ) : isError ? (
-              <ErrorState onRetry={() => refetch()} />
-            ) : !topStory ? (
-              <EmptyState message="No briefings yet" />
-            ) : (
-              <div className="grid gap-8 lg:grid-cols-5">
-                <div className="lg:col-span-3">
-                  {topStory.isBriefing ? (
-                    <Link to={`/article/${topStory.id}`} className="group">
-                      <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
-                        {topStory.title}
-                      </h1>
-                      <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
-                        {topStory.excerpt}
-                      </p>
-                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                        Read full briefing <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </Link>
-                  ) : (
-                    <a href={topStory.sourceUrl} target="_blank" rel="noopener noreferrer" className="group">
-                      <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
-                        {topStory.title}
-                      </h1>
-                      <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
-                        {topStory.excerpt}
-                      </p>
-                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                        Read at source <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </a>
-                  )}
+        {/* Hero */}
+        <section className="relative bg-hero overflow-hidden">
+          {/* Grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "linear-gradient(hsl(var(--hero-foreground) / 0.15) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--hero-foreground) / 0.15) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+
+          <div className="container relative py-16 md:py-24">
+            <div className="grid gap-12 lg:grid-cols-5 items-center">
+              {/* Left — 60% */}
+              <div className="lg:col-span-3">
+                <div className="flex items-center gap-2 text-sm font-medium text-primary mb-6">
+                  <span className="inline-block h-2 w-2 rounded-full bg-primary animate-pulse" />
+                  Daily Briefing — {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
                 </div>
 
-                {/* Trending sidebar */}
-                <aside className="lg:col-span-2 lg:border-l lg:pl-8">
-                  <h3 className="font-display text-sm font-semibold flex items-center gap-2 mb-4 text-muted-foreground">
-                    <TrendingUp className="h-4 w-4" /> Trending Now
-                  </h3>
-                  <div className="flex flex-col gap-4">
-                    {trending.map((article, i) => {
-                      const config = categoryConfig[article.category];
-                      const Wrapper = article.isBriefing
-                        ? ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
-                            <Link to={`/article/${article.id}`} className={cn}>{children}</Link>
-                          )
-                        : ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
-                            <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className={cn}>{children}</a>
-                          );
-                      return (
-                        <Wrapper key={article.id} className="group flex gap-3">
-                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <div>
-                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
-                              {config.label}
-                            </span>
-                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
-                              {article.title}
-                            </h4>
-                          </div>
-                        </Wrapper>
-                      );
-                    })}
-                    {trending.length === 0 && (
-                      <p className="text-xs text-muted-foreground">No trending items</p>
-                    )}
-                  </div>
-                </aside>
+                <h1 className="font-display text-3xl font-bold leading-tight text-hero-foreground md:text-[48px] md:leading-[1.15]">
+                  The intersection of technology, media &amp; society
+                </h1>
+
+                <p className="mt-5 text-lg leading-relaxed text-hero-muted max-w-xl">
+                  Curated intelligence across tech, media, communication, philosophy and advertising — updated daily.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button asChild size="lg">
+                    <Link to="/technology">
+                      Explore Today's Briefing <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="border-hero-card-border text-hero-foreground hover:bg-hero-card hover:text-hero-foreground">
+                    <Link to="/archive">Browse Archive</Link>
+                  </Button>
+                </div>
               </div>
-            )}
+
+              {/* Right — 40% mini cards */}
+              <div className="lg:col-span-2 flex flex-col gap-3">
+                {recentThree.length > 0 ? (
+                  recentThree.map((item) => {
+                    const catConfig = categoryConfig[item.category] ?? categoryConfig.technology;
+                    return (
+                      <a
+                        key={item.id}
+                        href={item.isBriefing ? `/article/${item.id}` : item.sourceUrl}
+                        target={item.isBriefing ? undefined : "_blank"}
+                        rel={item.isBriefing ? undefined : "noopener noreferrer"}
+                        className="group rounded-lg border border-hero-card-border bg-hero-card p-4 transition-all hover:border-primary/40 hover:-translate-y-0.5"
+                      >
+                        <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${catConfig.color}`}>
+                          {catConfig.label}
+                        </span>
+                        <h4 className="mt-2 text-sm font-medium leading-snug text-hero-foreground line-clamp-2 transition-colors group-hover:text-primary">
+                          {item.title}
+                        </h4>
+                        <p className="mt-1 text-xs text-hero-muted">{item.author}</p>
+                      </a>
+                    );
+                  })
+                ) : (
+                  /* Placeholder cards when DB is empty */
+                  Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="rounded-lg border border-hero-card-border bg-hero-card p-4">
+                      <div className="h-4 w-16 rounded-full bg-hero-card-border animate-pulse" />
+                      <div className="mt-3 h-4 w-full rounded bg-hero-card-border/60 animate-pulse" />
+                      <div className="mt-2 h-4 w-2/3 rounded bg-hero-card-border/40 animate-pulse" />
+                      <div className="mt-2 h-3 w-20 rounded bg-hero-card-border/30 animate-pulse" />
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
           </div>
         </section>
 
