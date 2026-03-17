@@ -1,1 +1,4 @@
 project_id = "rnrjitagedoufazbnynw"
+
+[functions.rss-feed]
+verify_jwt = false
