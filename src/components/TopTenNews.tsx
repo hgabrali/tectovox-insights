@@ -1,6 +1,7 @@
 import { Article, categoryConfig, type Category } from "@/lib/data";
 import { TrendingUp, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {
   if (article.isBriefing) {
