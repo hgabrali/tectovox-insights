@@ -111,7 +111,6 @@ const Index = () => {
       </main>
 
       <SiteFooter />
-      <MascotFloat />
     </div>
   );
 };
