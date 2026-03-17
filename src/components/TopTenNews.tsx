@@ -1,6 +1,7 @@
 import { Article, categoryConfig, type Category } from "@/lib/data";
 import { TrendingUp, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {
   if (article.isBriefing) {
@@ -21,10 +22,8 @@ const categoryBorder: Record<Category, string> = {
   advertising: "border-l-advertising",
 };
 
-export function TopTenNews({ items }: { items: Article[] }) {
+export function TopTenNews({ items, isLoading = false }: { items: Article[]; isLoading?: boolean }) {
   const top10 = items.slice(0, 10);
-
-  if (top10.length === 0) return null;
 
   return (
     <section className="container py-12 border-b border-border">
@@ -35,6 +34,22 @@ export function TopTenNews({ items }: { items: Article[] }) {
         <h2 className="font-display text-3xl font-bold">Top 10 News</h2>
       </div>
 
+      {isLoading ? (
+        <div className="grid gap-3 md:grid-cols-2">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="flex items-start gap-4 px-5 py-4 border-l-4 border-l-muted">
+              <Skeleton className="h-8 w-8 rounded" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-3 w-16" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-3 w-24" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : top10.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-8">No trending news yet.</p>
+      ) : (
       <div className="grid gap-0 md:grid-cols-2">
         {top10.map((article, i) => {
           const category = article.category ?? "technology";
@@ -76,6 +91,7 @@ export function TopTenNews({ items }: { items: Article[] }) {
           );
         })}
       </div>
+      )}
     </section>
   );
 }

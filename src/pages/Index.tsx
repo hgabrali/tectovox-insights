@@ -67,7 +67,7 @@ const Index = () => {
         </section>
 
         {/* Top 10 News */}
-        <TopTenNews items={allItems} />
+        <TopTenNews items={allItems} isLoading={isLoading} />
 
         {/* Filters + Content Grid */}
         <section className="container py-12">
