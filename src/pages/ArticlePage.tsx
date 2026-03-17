@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 const ArticlePage = () => {
   const { id } = useParams<{ id: string }>();
-  const article = sampleArticles.find((a) => a.id === id);
+  const article = mockArticles.find((a) => a.id === id);
 
   if (!article) {
     return (
