@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { categoryConfig, type Article } from "@/lib/data";
-import { Clock } from "lucide-react";
+import { categoryConfig, contentTypeConfig, type Article } from "@/lib/data";
+import { Clock, Play } from "lucide-react";
 
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
-  const config = categoryConfig[article.category];
-  const Icon = config.icon;
+  const catConfig = categoryConfig[article.category];
+  const typeConfig = contentTypeConfig[article.contentType];
+  const CatIcon = catConfig.icon;
+  const TypeIcon = typeConfig.icon;
 
   return (
     <Link
@@ -13,16 +15,51 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
-      {/* Category icon area */}
-      <div className={`flex h-32 items-center justify-center rounded-t-lg ${featured ? "h-48" : ""} bg-muted/50`}>
-        <Icon className="h-10 w-10 text-muted-foreground/40 transition-colors group-hover:text-primary/60" />
+      {/* Thumbnail area with content-type overlay */}
+      <div className={`relative flex items-center justify-center rounded-t-lg ${featured ? "h-48" : "h-32"} bg-muted/50`}>
+        <CatIcon className="h-10 w-10 text-muted-foreground/30 transition-colors group-hover:text-primary/50" />
+
+        {/* Video play overlay */}
+        {article.contentType === "video" && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-destructive/90 text-destructive-foreground shadow-lg transition-transform group-hover:scale-110">
+              <Play className="h-5 w-5 ml-0.5" fill="currentColor" />
+            </div>
+          </div>
+        )}
+
+        {/* Podcast waveform overlay */}
+        {article.contentType === "podcast" && (
+          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-center gap-[3px] h-6 opacity-40 group-hover:opacity-60 transition-opacity">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-[3px] rounded-full bg-accent"
+                style={{ height: `${Math.max(4, Math.sin(i * 0.7) * 16 + Math.random() * 8 + 6)}px` }}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Book icon overlay */}
+        {article.contentType === "book" && (
+          <div className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-md bg-philosophy/20 text-philosophy">
+            <TypeIcon className="h-4 w-4" />
+          </div>
+        )}
       </div>
 
       <div className="p-5">
-        {/* Category tag */}
-        <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${config.color}`}>
-          {config.label}
-        </span>
+        {/* Badge row: category + content type */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${catConfig.color}`}>
+            {catConfig.label}
+          </span>
+          <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px] font-medium ${typeConfig.color}`}>
+            <TypeIcon className="h-3 w-3" />
+            {typeConfig.label}
+          </span>
+        </div>
 
         <h3 className={`mt-3 font-display font-semibold leading-snug transition-colors group-hover:text-primary ${
           featured ? "text-xl" : "text-base"
