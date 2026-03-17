@@ -31,10 +31,7 @@ const Index = () => {
       <main className="flex-1">
         {/* Editorial Hero */}
         <section className="container pt-12 pb-10 md:pt-20 md:pb-14">
-          <p className="text-sm font-medium text-muted-foreground tracking-wide uppercase">
-            {dateStr}
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-black leading-[1.08] md:text-7xl lg:text-[80px]">
+          <h1 className="font-display text-5xl font-black leading-[1.08] md:text-7xl lg:text-[80px]">
             <span className="relative inline-block">
               <img
                 src={mascotImg}
@@ -44,6 +41,9 @@ const Index = () => {
               T
             </span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
           </h1>
+          <p className="mt-4 text-sm font-medium text-muted-foreground tracking-wide uppercase">
+            {dateStr}
+          </p>
           <div className="mt-8 h-px bg-border" />
         </section>
 
