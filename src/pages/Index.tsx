@@ -65,7 +65,15 @@ const Index = () => {
 
               {/* Right — 40% mini cards */}
               <div className="lg:col-span-2 flex flex-col gap-3">
-                {recentThree.length > 0 ? (
+                {isLoading ? (
+                  Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="rounded-lg border border-hero-card-border bg-hero-card p-4">
+                      <div className="h-4 w-16 rounded-full bg-hero-card-border animate-pulse" />
+                      <div className="mt-3 h-4 w-full rounded bg-hero-card-border/60 animate-pulse" />
+                      <div className="mt-2 h-4 w-2/3 rounded bg-hero-card-border/40 animate-pulse" />
+                    </div>
+                  ))
+                ) : recentThree.length > 0 ? (
                   recentThree.map((item) => {
                     const catConfig = categoryConfig[item.category] ?? categoryConfig.technology;
                     return (
@@ -87,15 +95,9 @@ const Index = () => {
                     );
                   })
                 ) : (
-                  /* Placeholder cards when DB is empty */
-                  Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="rounded-lg border border-hero-card-border bg-hero-card p-4">
-                      <div className="h-4 w-16 rounded-full bg-hero-card-border animate-pulse" />
-                      <div className="mt-3 h-4 w-full rounded bg-hero-card-border/60 animate-pulse" />
-                      <div className="mt-2 h-4 w-2/3 rounded bg-hero-card-border/40 animate-pulse" />
-                      <div className="mt-2 h-3 w-20 rounded bg-hero-card-border/30 animate-pulse" />
-                    </div>
-                  ))
+                  <div className="rounded-lg border border-hero-card-border bg-hero-card p-6 text-center">
+                    <p className="text-sm text-hero-muted">No items yet — content will appear here once published.</p>
+                  </div>
                 )}
               </div>
             </div>
