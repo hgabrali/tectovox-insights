@@ -2,15 +2,14 @@ import { useParams } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
+import { FilterBar } from "@/components/FilterBar";
 import { categoryConfig, type Category } from "@/lib/data";
 import { mockArticles } from "@/lib/mock-data";
-import { useState } from "react";
-
-type SortOption = "date" | "relevance";
+import { useContentFilters } from "@/hooks/use-content-filters";
 
 const TopicPage = () => {
   const { topic } = useParams<{ topic: string }>();
-  const [sort, setSort] = useState<SortOption>("date");
+  const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
 
   const category = topic as Category;
   const config = categoryConfig[category];
@@ -28,9 +27,7 @@ const TopicPage = () => {
   }
 
   const Icon = config.icon;
-  const articles = mockArticles
-    .filter((a) => a.category === category)
-    .sort((a, b) => (sort === "date" ? new Date(b.date).getTime() - new Date(a.date).getTime() : 0));
+  const articles = applyFilters(mockArticles, category);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -49,20 +46,9 @@ const TopicPage = () => {
           </div>
         </section>
 
-        {/* Sort controls */}
-        <div className="container pt-8 pb-4 flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">Sort by:</span>
-          {(["date", "relevance"] as SortOption[]).map((opt) => (
-            <button
-              key={opt}
-              onClick={() => setSort(opt)}
-              className={`rounded-full px-3 py-1 text-sm font-medium transition-colors ${
-                sort === opt ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
-            >
-              {opt.charAt(0).toUpperCase() + opt.slice(1)}
-            </button>
-          ))}
+        {/* Filters */}
+        <div className="container pt-8 pb-4">
+          <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} />
         </div>
 
         {/* Articles */}
@@ -75,7 +61,7 @@ const TopicPage = () => {
             ))}
           </div>
           {articles.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">No articles in this category yet.</p>
+            <p className="text-center text-muted-foreground py-12">No articles match your filters.</p>
           )}
         </section>
       </main>
