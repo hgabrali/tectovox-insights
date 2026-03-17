@@ -232,7 +232,7 @@ const ArchivePage = () => {
                           {article.readTime}
                         </span>
                       </div>
-                    </Link>
+                    </Wrapper>
                   );
                 })}
               </div>

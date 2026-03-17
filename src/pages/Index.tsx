@@ -102,8 +102,7 @@ const Index = () => {
                             </h4>
                           </div>
                         </a>
-                      )}
-                    );
+                      );
                   })}
                 </div>
               </aside>
