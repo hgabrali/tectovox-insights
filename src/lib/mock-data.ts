@@ -189,6 +189,13 @@ function generateArticles(): Article[] {
           case "book": readTime = `${200 + (id % 150)} pages`; break;
         }
 
+        const sourceUrls: Record<string, string> = {
+          article: "https://example.com/articles/",
+          video: "https://youtube.com/watch?v=",
+          podcast: "https://podcasts.example.com/episodes/",
+          book: "https://books.example.com/publications/",
+        };
+
         articles.push({
           id: `arc-${id}`,
           title: titles[cat][titleIdx],
@@ -199,6 +206,7 @@ function generateArticles(): Article[] {
           author: authors[authorIdx],
           readTime,
           trending: id % 7 === 0,
+          sourceUrl: `${sourceUrls[contentType]}${cat}-${id}`,
         });
         id++;
       }
