@@ -2,7 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig } from "@/lib/data";
+import { categoryConfig } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { ArrowLeft, Linkedin, Twitter, Link2, Clock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

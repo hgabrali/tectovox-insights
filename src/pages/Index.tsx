@@ -1,7 +1,8 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig } from "@/lib/data";
+import { categoryConfig } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";

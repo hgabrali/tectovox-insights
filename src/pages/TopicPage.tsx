@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
-import { sampleArticles, categoryConfig, type Category } from "@/lib/data";
+import { categoryConfig, type Category } from "@/lib/data";
+import { mockArticles } from "@/lib/mock-data";
 import { useState } from "react";
 
 type SortOption = "date" | "relevance";
