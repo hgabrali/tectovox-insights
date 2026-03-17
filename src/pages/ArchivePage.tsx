@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { mockArticles } from "@/lib/mock-data";
 import { categoryConfig, contentTypeConfig } from "@/lib/data";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { Search, ChevronDown, ChevronRight, Clock, Calendar } from "lucide-react";
+import { Search, ChevronDown, ChevronRight, Clock, Calendar, ExternalLink } from "lucide-react";
 
 const ITEMS_PER_PAGE = 50;
 
@@ -190,10 +190,16 @@ const ArchivePage = () => {
                   const catConfig = categoryConfig[article.category];
                   const typeConfig = contentTypeConfig[article.contentType];
                   const TypeIcon = typeConfig.icon;
+                  const Wrapper = article.isBriefing
+                    ? ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
+                        <Link to={`/article/${article.id}`} className={cn}>{children}</Link>
+                      )
+                    : ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
+                        <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className={cn}>{children}</a>
+                      );
                   return (
-                    <Link
+                    <Wrapper
                       key={article.id}
-                      to={`/article/${article.id}`}
                       className="group flex items-start gap-4 py-4 transition-colors hover:bg-muted/30 -mx-3 px-3 rounded-md"
                     >
                       {/* Date column */}
@@ -226,7 +232,7 @@ const ArchivePage = () => {
                           {article.readTime}
                         </span>
                       </div>
-                    </Link>
+                    </Wrapper>
                   );
                 })}
               </div>

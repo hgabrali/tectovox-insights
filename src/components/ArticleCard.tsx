@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
 import { categoryConfig, contentTypeConfig, type Article } from "@/lib/data";
-import { Clock, Play } from "lucide-react";
+import { Clock, Play, ExternalLink } from "lucide-react";
+
+function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {
+  if (article.isBriefing) {
+    return <Link to={`/article/${article.id}`} className={className}>{children}</Link>;
+  }
+  return (
+    <a href={article.sourceUrl} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </a>
+  );
+}
 
 export function ArticleCard({ article, featured = false }: { article: Article; featured?: boolean }) {
   const catConfig = categoryConfig[article.category];
@@ -9,8 +20,8 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
   const TypeIcon = typeConfig.icon;
 
   return (
-    <Link
-      to={`/article/${article.id}`}
+    <ArticleLink
+      article={article}
       className={`group block rounded-lg border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5 ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
@@ -47,6 +58,13 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
             <TypeIcon className="h-4 w-4" />
           </div>
         )}
+
+        {/* External link indicator */}
+        {!article.isBriefing && (
+          <div className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center rounded-full bg-foreground/10 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+            <ExternalLink className="h-3 w-3" />
+          </div>
+        )}
       </div>
 
       <div className="p-5">
@@ -77,8 +95,14 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
             <Clock className="h-3 w-3" />
             {article.readTime}
           </span>
+          {!article.isBriefing && (
+            <span className="flex items-center gap-1 text-primary/60">
+              <ExternalLink className="h-3 w-3" />
+              Source
+            </span>
+          )}
         </div>
       </div>
-    </Link>
+    </ArticleLink>
   );
 }

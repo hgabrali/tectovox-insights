@@ -29,6 +29,7 @@ const Index = () => {
             </div>
             <div className="grid gap-8 lg:grid-cols-5">
               <div className="lg:col-span-3">
+                {topStory.isBriefing ? (
                 <Link to={`/article/${topStory.id}`} className="group">
                   <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
                     {topStory.title}
@@ -40,6 +41,19 @@ const Index = () => {
                     Read full briefing <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
+                ) : (
+                <a href={topStory.sourceUrl} target="_blank" rel="noopener noreferrer" className="group">
+                  <h1 className="font-display text-3xl font-bold leading-tight md:text-5xl lg:text-5xl transition-colors group-hover:text-primary">
+                    {topStory.title}
+                  </h1>
+                  <p className="mt-4 text-lg leading-relaxed text-muted-foreground max-w-2xl">
+                    {topStory.excerpt}
+                  </p>
+                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                    Read at source <ArrowRight className="h-4 w-4" />
+                  </div>
+                </a>
+                )}
               </div>
 
               {/* Trending sidebar */}
@@ -50,25 +64,45 @@ const Index = () => {
                 <div className="flex flex-col gap-4">
                   {trending.map((article, i) => {
                     const config = categoryConfig[article.category];
-                    return (
-                      <Link
-                        key={article.id}
-                        to={`/article/${article.id}`}
-                        className="group flex gap-3"
-                      >
-                        <span className="font-display text-2xl font-bold text-muted-foreground/30">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <div>
-                          <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
-                            {config.label}
+                    return article.isBriefing ? (
+                        <Link
+                          key={article.id}
+                          to={`/article/${article.id}`}
+                          className="group flex gap-3"
+                        >
+                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
+                            {String(i + 1).padStart(2, "0")}
                           </span>
-                          <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
-                            {article.title}
-                          </h4>
-                        </div>
-                      </Link>
-                    );
+                          <div>
+                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
+                              {config.label}
+                            </span>
+                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
+                              {article.title}
+                            </h4>
+                          </div>
+                        </Link>
+                      ) : (
+                        <a
+                          key={article.id}
+                          href={article.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex gap-3"
+                        >
+                          <span className="font-display text-2xl font-bold text-muted-foreground/30">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div>
+                            <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-medium ${config.color}`}>
+                              {config.label}
+                            </span>
+                            <h4 className="mt-1 text-sm font-medium leading-snug transition-colors group-hover:text-primary">
+                              {article.title}
+                            </h4>
+                          </div>
+                        </a>
+                      );
                   })}
                 </div>
               </aside>
