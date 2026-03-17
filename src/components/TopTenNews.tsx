@@ -34,6 +34,22 @@ export function TopTenNews({ items, isLoading = false }: { items: Article[]; isL
         <h2 className="font-display text-3xl font-bold">Top 10 News</h2>
       </div>
 
+      {isLoading ? (
+        <div className="grid gap-3 md:grid-cols-2">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <div key={i} className="flex items-start gap-4 px-5 py-4 border-l-4 border-l-muted">
+              <Skeleton className="h-8 w-8 rounded" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-3 w-16" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-3 w-24" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : top10.length === 0 ? (
+        <p className="text-sm text-muted-foreground text-center py-8">No trending news yet.</p>
+      ) : (
       <div className="grid gap-0 md:grid-cols-2">
         {top10.map((article, i) => {
           const category = article.category ?? "technology";
