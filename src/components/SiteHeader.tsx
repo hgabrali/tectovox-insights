@@ -10,6 +10,7 @@ const navLinks: { label: string; to: string }[] = [
     label: val.label,
     to: `/${key}`,
   })),
+  { label: "Archive", to: "/archive" },
   { label: "About", to: "/about" },
 ];
 
