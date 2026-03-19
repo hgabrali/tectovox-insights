@@ -1,6 +1,7 @@
 import Parser from "rss-parser";
 import type { Source } from "./sources.js";
 import type { CrawledItem } from "./types.js";
+import { fetchOGImage, delay } from "./thumbnail-scraper.js";
 
 const parser = new Parser();
 
@@ -48,7 +49,7 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
 
   const durationTitlePattern = /\s+-\s+\d+[smh]$/;
 
-  return feed.items
+  const items: CrawledItem[] = feed.items
     .filter((item) => {
       if (!item.title || !item.link) return false;
       if (item.title.length < 20) return false;
@@ -67,4 +68,14 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
         ? new Date(item.pubDate).toISOString()
         : new Date().toISOString(),
     }));
+
+  // Scrape og:image for items missing thumbnails
+  for (const item of items) {
+    if (item.thumbnail === null) {
+      item.thumbnail = await fetchOGImage(item.url);
+      await delay(500);
+    }
+  }
+
+  return items;
 }
