@@ -45,11 +45,17 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
-      {/* Colored initial block */}
-      <div className={`flex items-center justify-center rounded-t-lg ${bgClass} ${featured ? "h-40" : "h-28"}`}>
-        <span className="text-5xl font-display font-black text-primary-foreground select-none">
-          {initial}
-        </span>
+      {/* Thumbnail / colored initial block */}
+      <div className={`rounded-t-lg overflow-hidden ${featured ? "h-40" : "h-28"}`}>
+        {article.imageUrl ? (
+          <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover" />
+        ) : (
+          <div className={`flex items-center justify-center w-full h-full ${bgClass}`}>
+            <span className="text-5xl font-display font-black text-primary-foreground select-none">
+              {initial}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="p-5">
