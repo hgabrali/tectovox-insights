@@ -11,7 +11,7 @@ export function useMorningBrief() {
   return useQuery({
     queryKey: ["morning-brief"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("briefs")
         .select("*")
         .order("date", { ascending: false })
