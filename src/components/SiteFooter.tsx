@@ -33,7 +33,7 @@ export function SiteFooter() {
           {/* Legal & Social */}
           <div className="flex flex-col gap-2">
             <h4 className="font-display text-sm font-bold mb-1">Legal</h4>
-            <Link to="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
             <Link to="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms of Use</Link>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
             <div className="mt-4 flex gap-3">
