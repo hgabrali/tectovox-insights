@@ -4,6 +4,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { TopTenNews } from "@/components/TopTenNews";
 import { TopStorySection } from "@/components/TopStory";
+import { MorningBriefSection } from "@/components/MorningBrief";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 import { useTopStories } from "@/hooks/use-top-stories";
@@ -45,6 +46,9 @@ const Index = () => {
           </p>
           <div className="mt-8 h-px bg-border" />
         </section>
+
+        {/* Morning Brief */}
+        <MorningBriefSection />
 
         {/* Top Story + Also Worth Reading */}
         <TopStorySection
