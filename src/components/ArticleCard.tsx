@@ -8,6 +8,8 @@ const categoryInitials: Record<Category, string> = {
   communication: "C",
   philosophy: "P",
   advertising: "A",
+  ai: "AI",
+  academia: "Ac",
 };
 
 const categoryBgClass: Record<Category, string> = {
@@ -16,6 +18,8 @@ const categoryBgClass: Record<Category, string> = {
   communication: "bg-communication",
   philosophy: "bg-philosophy",
   advertising: "bg-advertising",
+  ai: "bg-ai",
+  academia: "bg-academia",
 };
 
 function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {

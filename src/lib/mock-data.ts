@@ -1,6 +1,6 @@
 import type { Article, Category, ContentType } from "./data";
 
-const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising"];
+const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia"];
 const contentTypes: ContentType[] = ["article", "video", "podcast", "book"];
 
 const titles: Record<Category, string[]> = {
