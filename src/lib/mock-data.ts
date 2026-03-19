@@ -1,6 +1,6 @@
 import type { Article, Category, ContentType } from "./data";
 
-const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising"];
+const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia"];
 const contentTypes: ContentType[] = ["article", "video", "podcast", "book"];
 
 const titles: Record<Category, string[]> = {
@@ -74,6 +74,22 @@ const titles: Record<Category, string[]> = {
     "How DTC Brands Are Rewriting the Advertising Playbook",
     "Neuromarketing in 2026: Measuring Emotion at the Speed of Thought",
   ],
+  ai: [
+    "GPT-5 and the Dawn of Reasoning Machines",
+    "AI Governance Frameworks: Who Regulates the Regulators?",
+    "Multimodal Models Are Redefining Human-Computer Interaction",
+    "The Open Source AI Movement Gains Momentum",
+    "AI in Drug Discovery: From Lab to Market in Record Time",
+    "Foundation Models Meet Robotics: Embodied Intelligence Arrives",
+  ],
+  academia: [
+    "The Replication Crisis Enters Its Second Decade",
+    "Open Access Publishing: A Progress Report",
+    "How AI Is Transforming Peer Review",
+    "The Future of the University in a Post-AI World",
+    "Interdisciplinary Research: Breaking Down Departmental Silos",
+    "Academic Freedom Under Pressure: A Global Survey",
+  ],
 };
 
 const excerpts: Record<Category, string[]> = {
@@ -146,6 +162,22 @@ const excerpts: Record<Category, string[]> = {
     "As podcast audiences double, audio advertising technology and measurement are catching up fast.",
     "Direct-to-consumer brands are pioneering new advertising strategies that legacy brands are scrambling to copy.",
     "Brain-computer interfaces and eye-tracking are enabling real-time emotional measurement in ad testing.",
+  ],
+  ai: [
+    "OpenAI's latest model demonstrates genuine multi-step reasoning across scientific and mathematical domains.",
+    "Nations race to establish AI governance frameworks, but coordination remains elusive.",
+    "Models that process text, images, audio, and video simultaneously are changing how we interact with machines.",
+    "Community-driven AI projects challenge the dominance of proprietary foundation models.",
+    "AI-powered drug discovery platforms are compressing timelines from decades to months.",
+    "Large language models are being paired with robotic systems to create agents that can perceive and act in the physical world.",
+  ],
+  academia: [
+    "Failed replications continue to shake confidence in landmark studies across psychology and biomedicine.",
+    "The shift to open access is accelerating, but sustainable funding models remain elusive.",
+    "AI-assisted peer review promises faster turnaround but raises concerns about bias and accountability.",
+    "Universities grapple with how to remain relevant as AI democratizes access to knowledge.",
+    "Funding agencies increasingly reward cross-disciplinary collaboration, reshaping academic incentives.",
+    "A comprehensive survey reveals growing threats to academic freedom across multiple continents.",
   ],
 };
 

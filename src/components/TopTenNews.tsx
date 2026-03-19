@@ -20,6 +20,8 @@ const categoryBorder: Record<Category, string> = {
   communication: "border-l-communication",
   philosophy: "border-l-philosophy",
   advertising: "border-l-advertising",
+  ai: "border-l-ai",
+  academia: "border-l-academia",
 };
 
 export function TopTenNews({ items, isLoading = false }: { items: Article[]; isLoading?: boolean }) {
