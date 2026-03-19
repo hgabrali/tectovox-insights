@@ -3,10 +3,12 @@ name: Auto Crawl
 on:
   schedule:
     - cron: '0 * * * *'  # Every hour
+    - cron: '0 8 * * *'  # Daily at 08:00 UTC for morning brief
   workflow_dispatch:  # Manual trigger option
 
 jobs:
   crawl:
+    if: github.event.schedule != '0 8 * * *'
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +33,27 @@ jobs:
           BRIGHT_DATA_CUSTOMER: ${{ secrets.BRIGHT_DATA_CUSTOMER }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: npx tsx src/crawler/run.ts
+
+  morning-brief:
+    if: github.event.schedule == '0 8 * * *'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Generate morning brief
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npx tsx src/crawler/morning-brief.ts
