@@ -70,7 +70,7 @@ ${itemsXml}
       },
     });
   } catch (err) {
-    return new Response(`Error generating feed: ${err.message}`, {
+    return new Response(`Error generating feed: ${err instanceof Error ? err.message : String(err)}`, {
       status: 500,
       headers: corsHeaders,
     });
