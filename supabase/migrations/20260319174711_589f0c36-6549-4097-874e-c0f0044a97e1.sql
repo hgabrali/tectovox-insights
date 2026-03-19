@@ -1,0 +1,1 @@
+ALTER TABLE public.items ADD COLUMN relevance_score integer NOT NULL DEFAULT 0;

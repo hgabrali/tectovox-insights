@@ -26,6 +26,7 @@ export type Database = {
           is_briefing: boolean
           published_at: string
           read_time: string
+          relevance_score: number
           source_url: string
           title: string
           trending: boolean
@@ -41,6 +42,7 @@ export type Database = {
           is_briefing?: boolean
           published_at?: string
           read_time?: string
+          relevance_score?: number
           source_url?: string
           title: string
           trending?: boolean
@@ -56,6 +58,7 @@ export type Database = {
           is_briefing?: boolean
           published_at?: string
           read_time?: string
+          relevance_score?: number
           source_url?: string
           title?: string
           trending?: boolean
