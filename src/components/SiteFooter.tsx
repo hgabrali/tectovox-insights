@@ -44,8 +44,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} tectovox.com — All rights reserved.
+        <div className="mt-10 border-t border-border pt-6 space-y-3 text-center text-xs text-muted-foreground">
+          <p className="max-w-lg mx-auto leading-relaxed">
+            tectovox curates publicly available content from RSS feeds. All articles link to original sources. For removal requests:{" "}
+            <a href="mailto:info@tectovox.com" className="underline hover:text-foreground transition-colors">info@tectovox.com</a>
+          </p>
+          <p>© {new Date().getFullYear()} tectovox.com — All rights reserved.</p>
         </div>
       </div>
     </footer>
