@@ -29,7 +29,7 @@ const TopicPage = () => {
 
   const Icon = config.icon;
 
-  const { data: items = [], isLoading, isError, refetch } = useItems({ category });
+  const { data: items = [], isLoading, isError, refetch } = useItems({ category, sortBy: filters.sort });
   const articles = applyFilters(items, category);
 
   return (
