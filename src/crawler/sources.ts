@@ -96,14 +96,14 @@ export const SOURCES: Source[] = [
   // AI / LLM / Data Science
   {
     name: "MIT AI News",
-    feedUrl: "https://news.mit.edu/rss/topic/artificial-intelligence",
+    feedUrl: "https://news.mit.edu/rss/research",
     topic: "ai",
     content_type: "news",
     maxItems: 5,
   },
   {
     name: "Stanford HAI",
-    feedUrl: "https://hai.stanford.edu/news/feed",
+    feedUrl: "https://hai.stanford.edu/news/rss.xml",
     topic: "ai",
     content_type: "news",
     maxItems: 5,
@@ -120,6 +120,7 @@ export const SOURCES: Source[] = [
     feedUrl: "https://huggingface.co/blog/feed.xml",
     topic: "ai",
     content_type: "news",
+    skipTitleLengthCheck: true,
     maxItems: 5,
   },
   {
@@ -138,7 +139,7 @@ export const SOURCES: Source[] = [
   },
   {
     name: "Import AI",
-    feedUrl: "https://importai.substack.com/feed",
+    feedUrl: "https://jack-clark.net/feed/",
     topic: "ai",
     content_type: "news",
     maxItems: 5,
@@ -156,21 +157,21 @@ export const YOUTUBE_SOURCES: YouTubeSource[] = [
   },
   {
     name: "Stanford Online",
-    channelId: "UClBRE2e-MuQ4ND8lUBMwGCQ",
+    channelId: "UCBa5G_ESCn8Yd4vw5U-gIcg",
     topic: "academia",
     content_type: "video",
     maxItems: 5,
   },
   {
     name: "Oxford University",
-    channelId: "UC55auOmZwoSR7T4QMGej6Gg",
+    channelId: "UCK8f1CUe8y403u3b0gCINww",
     topic: "academia",
     content_type: "video",
     maxItems: 5,
   },
   {
     name: "Harvard University",
-    channelId: "UCX4sTkbKgvpR1CqIvRnKpCA",
+    channelId: "UCLv7Gzc3VTO6ggFlXY0sOyw",
     topic: "academia",
     content_type: "video",
     maxItems: 5,
@@ -198,7 +199,14 @@ export const YOUTUBE_SOURCES: YouTubeSource[] = [
   },
   {
     name: "3Blue1Brown",
-    channelId: "UCYO_jab_esuFRV4b17AJtAg",
+    channelId: "UCYO_jab_esuFRV4b17AJtAw",
+    topic: "academia",
+    content_type: "video",
+    maxItems: 5,
+  },
+  {
+    name: "Demis Hassabis (DeepMind)",
+    channelId: "UCP7jMXSY2xbc3KCAE0MHQ-A",
     topic: "academia",
     content_type: "video",
     maxItems: 5,
