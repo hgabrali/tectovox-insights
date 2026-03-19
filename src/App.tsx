@@ -25,6 +25,7 @@ const App = () => (
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-of-use" element={<TermsOfUsePage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/:topic" element={<TopicPage />} />
           <Route path="*" element={<NotFound />} />
