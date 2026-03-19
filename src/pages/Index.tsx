@@ -15,6 +15,7 @@ import mascotImg from "@/assets/mascot-sitting.png";
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20, sortBy: filters.sort });
+  const { data: topStories = [], isLoading: isLoadingTop } = useTopStories();
 
   const filtered = applyFilters(allItems);
 
