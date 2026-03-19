@@ -7,6 +7,33 @@ const parser = new Parser();
 
 const VALID_CONTENT_TYPES = new Set(["news", "video", "podcast", "book"]);
 
+const LOW_QUALITY_TITLE_KEYWORDS = [
+  "promo code",
+  "coupon",
+  "discount code",
+  "% off",
+  "deals",
+  "sale",
+  "voucher",
+  "cashback",
+];
+
+const LOW_QUALITY_URL_PATTERNS = [
+  "/coupons/",
+  "/deals/",
+  "/promo/",
+  "/vouchers/",
+];
+
+function isLowQualityItem(title: string, url: string): boolean {
+  const lowerTitle = title.toLowerCase();
+  if (lowerTitle.length < 25) return true;
+  if (LOW_QUALITY_TITLE_KEYWORDS.some((kw) => lowerTitle.includes(kw))) return true;
+  const lowerUrl = url.toLowerCase();
+  if (LOW_QUALITY_URL_PATTERNS.some((p) => lowerUrl.includes(p))) return true;
+  return false;
+}
+
 function resolveContentType(
   type: string
 ): "news" | "video" | "podcast" | "book" {
@@ -49,14 +76,24 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
 
   const durationTitlePattern = /\s+-\s+\d+[smh]$/;
 
-  const items: CrawledItem[] = feed.items
-    .filter((item) => {
-      if (!item.title || !item.link) return false;
-      if (item.title.length < 20) return false;
-      if (durationTitlePattern.test(item.title)) return false;
-      return true;
-    })
-    .map((item) => ({
+  const validItems = feed.items.filter((item) => {
+    if (!item.title || !item.link) return false;
+    if (durationTitlePattern.test(item.title)) return false;
+    return true;
+  });
+
+  const beforeCount = validItems.length;
+  const qualityItems = validItems.filter(
+    (item) => !isLowQualityItem(item.title!, item.link!)
+  );
+  const filteredOut = beforeCount - qualityItems.length;
+  if (filteredOut > 0) {
+    console.log(
+      `[${source.name}] Filtered out ${filteredOut} low-quality item(s)`
+    );
+  }
+
+  const items: CrawledItem[] = qualityItems.map((item) => ({
       title: item.title!,
       url: item.link!,
       summary: item.contentSnippet?.slice(0, 500) ?? "",
