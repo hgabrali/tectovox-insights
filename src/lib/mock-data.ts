@@ -163,6 +163,22 @@ const excerpts: Record<Category, string[]> = {
     "Direct-to-consumer brands are pioneering new advertising strategies that legacy brands are scrambling to copy.",
     "Brain-computer interfaces and eye-tracking are enabling real-time emotional measurement in ad testing.",
   ],
+  ai: [
+    "OpenAI's latest model demonstrates genuine multi-step reasoning across scientific and mathematical domains.",
+    "Nations race to establish AI governance frameworks, but coordination remains elusive.",
+    "Models that process text, images, audio, and video simultaneously are changing how we interact with machines.",
+    "Community-driven AI projects challenge the dominance of proprietary foundation models.",
+    "AI-powered drug discovery platforms are compressing timelines from decades to months.",
+    "Large language models are being paired with robotic systems to create agents that can perceive and act in the physical world.",
+  ],
+  academia: [
+    "Failed replications continue to shake confidence in landmark studies across psychology and biomedicine.",
+    "The shift to open access is accelerating, but sustainable funding models remain elusive.",
+    "AI-assisted peer review promises faster turnaround but raises concerns about bias and accountability.",
+    "Universities grapple with how to remain relevant as AI democratizes access to knowledge.",
+    "Funding agencies increasingly reward cross-disciplinary collaboration, reshaping academic incentives.",
+    "A comprehensive survey reveals growing threats to academic freedom across multiple continents.",
+  ],
 };
 
 const authors = [
