@@ -63,9 +63,6 @@ const ArchivePage = () => {
             />
           </div>
 
-          <p className="mb-2 text-xs font-mono text-destructive">
-            DEBUG: Items loaded: {allItems.length} | isLoading: {String(isLoading)} | isError: {String(isError)}
-          </p>
           <div className="mb-4 text-sm text-muted-foreground">
             {allItems.length} result{allItems.length !== 1 ? "s" : ""}
           </div>
