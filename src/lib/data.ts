@@ -1,4 +1,4 @@
-import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, LucideIcon } from "lucide-react";
+import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, Sparkles, GraduationCap, LucideIcon } from "lucide-react";
 
 export type ContentType = "article" | "video" | "podcast" | "book";
 
@@ -17,7 +17,7 @@ export interface Article {
   isBriefing?: boolean;
 }
 
-export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising";
+export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising" | "ai" | "academia";
 
 export const contentTypeConfig: Record<ContentType, { label: string; icon: LucideIcon; color: string }> = {
   article: {
@@ -72,5 +72,17 @@ export const categoryConfig: Record<Category, { label: string; color: string; ic
     color: "bg-advertising/10 text-advertising border-advertising/20",
     icon: Megaphone,
     description: "Dissecting the strategies, technologies, and cultural forces driving modern brand communication.",
+  },
+  ai: {
+    label: "AI",
+    color: "bg-ai/10 text-ai border-ai/20",
+    icon: Sparkles,
+    description: "Tracking the latest in artificial intelligence — from foundational models to real-world applications and societal impact.",
+  },
+  academia: {
+    label: "Academia",
+    color: "bg-academia/10 text-academia border-academia/20",
+    icon: GraduationCap,
+    description: "Highlighting research, scholarly discourse, and the evolving landscape of higher education and knowledge production.",
   },
 };
