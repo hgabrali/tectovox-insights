@@ -40,17 +40,25 @@ interface UseItemsOptions {
   offset?: number;
   search?: string;
   enabled?: boolean;
+  sortBy?: "date" | "relevance";
 }
 
-export function useItems({ category, limit = 50, offset = 0, search, enabled = true }: UseItemsOptions = {}) {
+export function useItems({ category, limit = 50, offset = 0, search, enabled = true, sortBy = "date" }: UseItemsOptions = {}) {
   return useQuery({
-    queryKey: ["items", { category, limit, offset, search }],
+    queryKey: ["items", { category, limit, offset, search, sortBy }],
     enabled,
     queryFn: async () => {
       let query = supabase
         .from("items")
-        .select("*")
-        .order("published_at", { ascending: false });
+        .select("*");
+
+      if (sortBy === "relevance") {
+        query = query
+          .order("relevance_score", { ascending: false })
+          .order("published_at", { ascending: false });
+      } else {
+        query = query.order("published_at", { ascending: false });
+      }
 
       if (category) {
         query = query.eq("category", category);
