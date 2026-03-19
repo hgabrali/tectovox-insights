@@ -74,6 +74,22 @@ const titles: Record<Category, string[]> = {
     "How DTC Brands Are Rewriting the Advertising Playbook",
     "Neuromarketing in 2026: Measuring Emotion at the Speed of Thought",
   ],
+  ai: [
+    "GPT-5 and the Dawn of Reasoning Machines",
+    "AI Governance Frameworks: Who Regulates the Regulators?",
+    "Multimodal Models Are Redefining Human-Computer Interaction",
+    "The Open Source AI Movement Gains Momentum",
+    "AI in Drug Discovery: From Lab to Market in Record Time",
+    "Foundation Models Meet Robotics: Embodied Intelligence Arrives",
+  ],
+  academia: [
+    "The Replication Crisis Enters Its Second Decade",
+    "Open Access Publishing: A Progress Report",
+    "How AI Is Transforming Peer Review",
+    "The Future of the University in a Post-AI World",
+    "Interdisciplinary Research: Breaking Down Departmental Silos",
+    "Academic Freedom Under Pressure: A Global Survey",
+  ],
 };
 
 const excerpts: Record<Category, string[]> = {
