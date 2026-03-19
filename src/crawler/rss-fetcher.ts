@@ -46,8 +46,15 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
   const feed = await parser.parseURL(source.feedUrl);
   const contentType = resolveContentType(source.content_type);
 
+  const durationTitlePattern = /\s+-\s+\d+[smh]$/;
+
   return feed.items
-    .filter((item) => item.title && item.link)
+    .filter((item) => {
+      if (!item.title || !item.link) return false;
+      if (item.title.length < 20) return false;
+      if (durationTitlePattern.test(item.title)) return false;
+      return true;
+    })
     .map((item) => ({
       title: item.title!,
       url: item.link!,

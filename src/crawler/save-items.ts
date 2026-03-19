@@ -15,16 +15,17 @@ export async function saveItems(items: CrawledItem[]): Promise<void> {
 
     const { error } = await supabaseAdmin.from("items").upsert(
       {
-        title: item.title,
         url: item.url,
-        summary: item.summary,
-        thumbnail: item.thumbnail,
+        title: item.title,
+        source_url: item.url,
+        excerpt: item.summary,
+        image_url: item.thumbnail,
         source_name: item.source_name,
         content_type: item.content_type,
-        topic: item.topic,
+        category: item.topic,
         published_at: item.published_at,
       },
-      { onConflict: "url" }
+      { onConflict: "source_url" }
     );
 
     if (error) {

@@ -33,22 +33,23 @@ export const SOURCES: Source[] = [
     content_type: "news",
   },
   {
-    name: "Columbia Journalism Review",
-    feedUrl: "https://www.cjr.org/feed",
+    name: "Poynter",
+    feedUrl: "https://www.poynter.org/feed/",
     topic: "media",
     content_type: "news",
   },
   // Advertising
   {
-    name: "AdAge",
-    feedUrl: "https://adage.com/arc/outboundfeeds/rss/",
+    name: "AdExchanger",
+    feedUrl: "https://adexchanger.com/feed/",
     topic: "advertising",
     content_type: "news",
   },
+  // Technology
   {
-    name: "Marketing Week",
-    feedUrl: "https://www.marketingweek.com/feed/",
-    topic: "advertising",
+    name: "The Verge",
+    feedUrl: "https://www.theverge.com/rss/index.xml",
+    topic: "technology",
     content_type: "news",
   },
   // Philosophy
