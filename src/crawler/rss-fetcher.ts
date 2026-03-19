@@ -93,7 +93,9 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
     );
   }
 
-  const items: CrawledItem[] = qualityItems.map((item) => ({
+  const limitedItems = qualityItems.slice(0, source.maxItems ?? 10);
+
+  const items: CrawledItem[] = limitedItems.map((item) => ({
       title: item.title!,
       url: item.link!,
       summary: item.contentSnippet?.slice(0, 500) ?? "",

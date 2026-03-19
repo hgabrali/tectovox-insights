@@ -31,7 +31,7 @@ export async function fetchYouTubeChannel(
     key: apiKey,
     channelId: source.channelId,
     order: "date",
-    maxResults: "5",
+    maxResults: String(source.maxItems ?? 5),
     type: "video",
     part: "snippet",
   });
