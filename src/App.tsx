@@ -9,6 +9,7 @@ import ArticlePage from "./pages/ArticlePage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ArchivePage from "./pages/ArchivePage.tsx";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage.tsx";
+import TermsOfUsePage from "./pages/TermsOfUsePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
