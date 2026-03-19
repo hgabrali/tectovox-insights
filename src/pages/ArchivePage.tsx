@@ -79,8 +79,10 @@ const ArchivePage = () => {
           ) : (
             <div className="flex flex-col divide-y">
               {paginated.map((article) => {
-                const catConfig = categoryConfig[article.category];
-                const typeConfig = contentTypeConfig[article.contentType];
+                const category = article.category ?? "technology";
+                const contentType = article.contentType ?? "article";
+                const catConfig = categoryConfig[category] ?? categoryConfig.technology;
+                const typeConfig = contentTypeConfig[contentType] ?? contentTypeConfig.article;
                 const TypeIcon = typeConfig.icon;
                 const Wrapper = article.isBriefing
                   ? ({ children, className: cn }: { children: React.ReactNode; className?: string }) => (
