@@ -59,10 +59,10 @@ const AboutPage = () => {
             <p>
               Say hi:{" "}
               <a
-                href="mailto:info@tectovox.com"
+                href="mailto:hande.gabrali@gmail.com"
                 className="underline hover:text-foreground transition-colors"
               >
-                info@tectovox.com
+                hande.gabrali@gmail.com
               </a>
             </p>
           </div>
