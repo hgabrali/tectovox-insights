@@ -15,6 +15,9 @@ export function SiteFooter() {
             <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </Link>
+            <Link to="/terms-of-use" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Terms of Use
+            </Link>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Contact
             </Link>
