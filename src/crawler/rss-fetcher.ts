@@ -25,9 +25,9 @@ const LOW_QUALITY_URL_PATTERNS = [
   "/vouchers/",
 ];
 
-function isLowQualityItem(title: string, url: string): boolean {
+function isLowQualityItem(title: string, url: string, skipTitleLengthCheck = false): boolean {
   const lowerTitle = title.toLowerCase();
-  if (lowerTitle.length < 25) return true;
+  if (!skipTitleLengthCheck && lowerTitle.length < 25) return true;
   if (LOW_QUALITY_TITLE_KEYWORDS.some((kw) => lowerTitle.includes(kw))) return true;
   const lowerUrl = url.toLowerCase();
   if (LOW_QUALITY_URL_PATTERNS.some((p) => lowerUrl.includes(p))) return true;
@@ -84,7 +84,7 @@ export async function fetchRSSFeed(source: Source): Promise<CrawledItem[]> {
 
   const beforeCount = validItems.length;
   const qualityItems = validItems.filter(
-    (item) => !isLowQualityItem(item.title!, item.link!)
+    (item) => !isLowQualityItem(item.title!, item.link!, source.skipTitleLengthCheck)
   );
   const filteredOut = beforeCount - qualityItems.length;
   if (filteredOut > 0) {

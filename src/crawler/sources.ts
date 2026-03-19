@@ -3,6 +3,7 @@ export interface Source {
   feedUrl: string;
   topic: string;
   content_type: "news" | "video" | "podcast" | "book";
+  skipTitleLengthCheck?: boolean;
 }
 
 export const SOURCES: Source[] = [
@@ -58,6 +59,7 @@ export const SOURCES: Source[] = [
     feedUrl: "https://aeon.co/feed.rss",
     topic: "philosophy",
     content_type: "news",
+    skipTitleLengthCheck: true,
   },
   // Communication
   {
