@@ -8,8 +8,6 @@ import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
-import { Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import mascotImg from "@/assets/mascot-sitting.png";
 
 const Index = () => {
@@ -92,23 +90,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* LinkedIn CTA */}
-        <section className="border-t border-border">
-          <div className="container py-16 text-center">
-            <Linkedin className="mx-auto h-8 w-8 text-muted-foreground mb-4" />
-            <h2 className="font-display text-2xl font-bold">Stay in the loop</h2>
-            <p className="mt-2 text-muted-foreground max-w-md mx-auto text-sm">
-              Follow tectovox on LinkedIn for daily briefings at the intersection of tech and society.
-            </p>
-            <div className="mt-6">
-              <Button asChild size="lg">
-                <a href="https://linkedin.com/company/tectovox" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="mr-2 h-4 w-4" /> Follow on LinkedIn
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
       </main>
 
       <SiteFooter />
