@@ -47,6 +47,9 @@ const Index = () => {
           <div className="mt-8 h-px bg-border" />
         </section>
 
+        {/* Morning Brief */}
+        <MorningBriefSection />
+
         {/* Top Story + Also Worth Reading */}
         <TopStorySection
           topStory={topStories[0] ?? null}
