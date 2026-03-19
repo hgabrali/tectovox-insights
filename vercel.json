@@ -1,8 +1,13 @@
 {
   "rewrites": [
-    { "source": "/(.*)\\.png", "destination": "/$1.png" },
-    { "source": "/(.*)\\.html", "destination": "/$1.html" },
-    { "source": "/(.*)\\.xml", "destination": "/$1.xml" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
   ]
 }
