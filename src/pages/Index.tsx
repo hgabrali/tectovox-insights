@@ -12,7 +12,7 @@ import mascotImg from "@/assets/mascot-sitting.png";
 
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
-  const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20 });
+  const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20, sortBy: filters.sort });
 
   const filtered = applyFilters(allItems);
 
