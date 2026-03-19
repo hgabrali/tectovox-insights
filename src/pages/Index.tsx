@@ -46,6 +46,13 @@ const Index = () => {
           <div className="mt-8 h-px bg-border" />
         </section>
 
+        {/* Top Story + Also Worth Reading */}
+        <TopStorySection
+          topStory={topStories[0] ?? null}
+          alsoWorthReading={topStories.slice(1)}
+          isLoading={isLoadingTop}
+        />
+
         {/* Category Quick Links */}
         <section className="border-b border-border">
           <div className="container py-5">
