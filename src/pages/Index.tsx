@@ -3,8 +3,10 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { TopTenNews } from "@/components/TopTenNews";
+import { TopStorySection } from "@/components/TopStory";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
+import { useTopStories } from "@/hooks/use-top-stories";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
@@ -13,6 +15,7 @@ import mascotImg from "@/assets/mascot-sitting.png";
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20, sortBy: filters.sort });
+  const { data: topStories = [], isLoading: isLoadingTop } = useTopStories();
 
   const filtered = applyFilters(allItems);
 
@@ -42,6 +45,13 @@ const Index = () => {
           </p>
           <div className="mt-8 h-px bg-border" />
         </section>
+
+        {/* Top Story + Also Worth Reading */}
+        <TopStorySection
+          topStory={topStories[0] ?? null}
+          alsoWorthReading={topStories.slice(1)}
+          isLoading={isLoadingTop}
+        />
 
         {/* Category Quick Links */}
         <section className="border-b border-border">
