@@ -8,8 +8,6 @@ import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
-import { Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import mascotImg from "@/assets/mascot-sitting.png";
 
 const Index = () => {
