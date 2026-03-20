@@ -27,7 +27,9 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-use" element={<TermsOfUsePage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
-          <Route path="/:topic" element={<TopicPage />} />
+          {["technology", "media", "communication", "philosophy", "advertising", "ai", "academia"].map((topic) => (
+            <Route key={topic} path={`/${topic}`} element={<TopicPage />} />
+          ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

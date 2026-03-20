@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
@@ -9,7 +9,8 @@ import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 
 const TopicPage = () => {
-  const { topic } = useParams<{ topic: string }>();
+  const location = useLocation();
+  const topic = location.pathname.slice(1);
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
 
   const category = topic as Category;
