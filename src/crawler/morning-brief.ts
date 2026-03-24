@@ -4,8 +4,31 @@ import { supabaseAdmin } from "./supabase-admin";
 
 const anthropic = new Anthropic();
 
-async function fetchTopItems() {
-  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+type Session = "morning" | "afternoon" | "evening";
+
+const SESSION_CONFIG: Record<Session, { hoursBack: number; tone: string }> = {
+  morning: {
+    hoursBack: 8,
+    tone: "Start of day briefing — what happened overnight",
+  },
+  afternoon: {
+    hoursBack: 5,
+    tone: "Midday update — what's developing right now",
+  },
+  evening: {
+    hoursBack: 6,
+    tone: "End of day wrap-up — today's most important stories",
+  },
+};
+
+function getSession(): Session {
+  const env = process.env.BRIEF_SESSION;
+  if (env === "morning" || env === "afternoon" || env === "evening") return env;
+  return "morning";
+}
+
+async function fetchTopItems(hoursBack: number) {
+  const since = new Date(Date.now() - hoursBack * 60 * 60 * 1000).toISOString();
 
   const { data, error } = await supabaseAdmin
     .from("items")
@@ -15,13 +38,17 @@ async function fetchTopItems() {
     .limit(30);
 
   if (error) throw new Error(`Failed to fetch items: ${error.message}`);
-  if (!data || data.length === 0) throw new Error("No items found in last 24 hours");
+  if (!data || data.length === 0) throw new Error(`No items found in last ${hoursBack} hours`);
 
   console.log(`Fetched ${data.length} items for brief generation`);
   return data;
 }
 
-async function generateBrief(articles: { title: string; excerpt: string }[], language: string): Promise<string> {
+async function generateBrief(
+  articles: { title: string; excerpt: string }[],
+  language: string,
+  tone: string,
+): Promise<string> {
   const articlesText = articles
     .map((a, i) => `${i + 1}. ${a.title}${a.excerpt ? ` — ${a.excerpt}` : ""}`)
     .join("\n");
@@ -34,7 +61,9 @@ async function generateBrief(articles: { title: string; excerpt: string }[], lan
         role: "user",
         content: `You are an editor for tectovox.com, a daily intelligence briefing covering technology, media, AI, philosophy, advertising and academia.
 
-Based on these articles from the last 24 hours, write a Morning Brief with 5-7 bullet points highlighting the most important developments. Each bullet point should be 1-2 sentences max. Be sharp, insightful, and editorial.
+Tone: ${tone}
+
+Based on these recent articles, write a brief with 5-7 bullet points highlighting the most important developments. Each bullet point should be 1-2 sentences max. Be sharp, insightful, and editorial.
 
 Write in ${language}. Format: bullet points only, no intro text.
 
@@ -49,25 +78,31 @@ ${articlesText}`,
   return block.text;
 }
 
-async function saveBrief(contentEn: string, contentTr: string) {
+async function saveBrief(session: Session, contentEn: string, contentTr: string) {
   const today = new Date().toISOString().split("T")[0];
 
   const { error } = await supabaseAdmin
     .from("briefs")
-    .upsert({ date: today, content_en: contentEn, content_tr: contentTr }, { onConflict: "date" });
+    .upsert(
+      { date: today, session, content_en: contentEn, content_tr: contentTr },
+      { onConflict: "date,session" },
+    );
 
   if (error) throw new Error(`Failed to save brief: ${error.message}`);
-  console.log(`Brief saved for ${today}`);
+  console.log(`Brief saved for ${today} [${session}]`);
 }
 
 async function main() {
-  console.log("Starting Morning Brief generation...");
+  const session = getSession();
+  const config = SESSION_CONFIG[session];
 
-  const articles = await fetchTopItems();
+  console.log(`Starting ${session} brief generation (last ${config.hoursBack}h)...`);
+
+  const articles = await fetchTopItems(config.hoursBack);
 
   const [contentEn, contentTr] = await Promise.all([
-    generateBrief(articles, "English"),
-    generateBrief(articles, "Turkish"),
+    generateBrief(articles, "English", config.tone),
+    generateBrief(articles, "Turkish", config.tone),
   ]);
 
   console.log("\n=== English Brief ===");
@@ -75,11 +110,11 @@ async function main() {
   console.log("\n=== Turkish Brief ===");
   console.log(contentTr);
 
-  await saveBrief(contentEn, contentTr);
-  console.log("Morning Brief generation complete!");
+  await saveBrief(session, contentEn, contentTr);
+  console.log(`${session.charAt(0).toUpperCase() + session.slice(1)} brief generation complete!`);
 }
 
 main().catch((err) => {
-  console.error("Morning Brief failed:", err);
+  console.error("Brief generation failed:", err);
   process.exit(1);
 });
