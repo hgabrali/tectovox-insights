@@ -41,6 +41,8 @@ export function useTopStories() {
       const { data, error } = await supabase
         .from("items")
         .select("*")
+        .not("title", "like", "%&#%")
+        .or("category.neq.academia,content_type.neq.video")
         .order("relevance_score", { ascending: false })
         .order("published_at", { ascending: false })
         .limit(4);
