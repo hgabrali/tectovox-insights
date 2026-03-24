@@ -23,6 +23,7 @@ const categoryInitials: Record<Category, string> = {
   advertising: "A",
   ai: "AI",
   academia: "Ac",
+  "data-science": "DS",
 };
 
 function TopStoryLink({ article, children }: { article: Article; children: React.ReactNode }) {
