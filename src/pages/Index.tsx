@@ -3,8 +3,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { TopTenNews } from "@/components/TopTenNews";
-
 import { MorningBriefSection } from "@/components/MorningBrief";
+import { TopSourcesSection } from "@/components/TopSources";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 
@@ -120,6 +120,8 @@ const Index = () => {
         {/* Morning Brief */}
         <MorningBriefSection />
 
+        {/* Top Sources This Week */}
+        <TopSourcesSection />
 
 
         {/* Category Pills */}
