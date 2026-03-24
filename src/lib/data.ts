@@ -1,4 +1,4 @@
-import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, Sparkles, GraduationCap, LucideIcon } from "lucide-react";
+import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, Sparkles, GraduationCap, BarChart2, LucideIcon } from "lucide-react";
 
 export type ContentType = "article" | "video" | "podcast" | "book";
 
