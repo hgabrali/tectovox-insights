@@ -17,7 +17,7 @@ export interface Article {
   isBriefing?: boolean;
 }
 
-export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising" | "ai" | "academia";
+export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising" | "ai" | "academia" | "data-science";
 
 export const contentTypeConfig: Record<ContentType, { label: string; icon: LucideIcon; color: string }> = {
   article: {
