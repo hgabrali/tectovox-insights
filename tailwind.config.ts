@@ -64,6 +64,7 @@ export default {
         advertising: "hsl(var(--advertising))",
         ai: "hsl(var(--ai))",
         academia: "hsl(var(--academia))",
+        "data-science": "hsl(var(--data-science))",
       },
       borderRadius: {
         lg: "var(--radius)",

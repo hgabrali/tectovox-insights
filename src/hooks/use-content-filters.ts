@@ -19,7 +19,7 @@ export function useContentFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters: Filters = useMemo(() => ({
-    category: parseParam(searchParams.get("category"), ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia"]),
+    category: parseParam(searchParams.get("category"), ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia", "data-science"]),
     type: parseParam(searchParams.get("type"), ["article", "video", "podcast", "book"]),
     date: parseParam(searchParams.get("date"), ["all", "today", "week", "month"]) ?? "all",
     sort: parseParam(searchParams.get("sort"), ["date", "relevance"]) ?? "date",

@@ -85,4 +85,10 @@ export const categoryConfig: Record<Category, { label: string; color: string; ic
     icon: GraduationCap,
     description: "Highlighting research, scholarly discourse, and the evolving landscape of higher education and knowledge production.",
   },
+  "data-science": {
+    label: "Data Science",
+    color: "bg-data-science/10 text-data-science border-data-science/20",
+    icon: BarChart2,
+    description: "Exploring data analytics, machine learning pipelines, statistical modeling, and the tools transforming raw data into actionable insights.",
+  },
 };
