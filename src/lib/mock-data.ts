@@ -90,6 +90,14 @@ const titles: Record<Category, string[]> = {
     "Interdisciplinary Research: Breaking Down Departmental Silos",
     "Academic Freedom Under Pressure: A Global Survey",
   ],
+  "data-science": [
+    "How Feature Stores Are Becoming the Backbone of ML Pipelines",
+    "The Rise of DataOps: Bringing DevOps Practices to Data Teams",
+    "Causal Inference vs Correlation: Why It Matters for Business Decisions",
+    "Real-Time Analytics at Scale: Stream Processing Architectures",
+    "The Data Lakehouse Paradigm: Unifying Warehouses and Lakes",
+    "AutoML Is Democratizing Predictive Modeling Across Industries",
+  ],
 };
 
 const excerpts: Record<Category, string[]> = {
