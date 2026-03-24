@@ -24,6 +24,17 @@ const categoryBgClass: Record<Category, string> = {
   "data-science": "bg-data-science",
 };
 
+const categoryBorderClass: Record<Category, string> = {
+  technology: "border-l-tech",
+  media: "border-l-media",
+  communication: "border-l-communication",
+  philosophy: "border-l-philosophy",
+  advertising: "border-l-advertising",
+  ai: "border-l-ai",
+  academia: "border-l-academia",
+  "data-science": "border-l-data-science",
+};
+
 function ArticleLink({ article, children, className }: { article: Article; children: React.ReactNode; className?: string }) {
   if (article.isBriefing) {
     return <Link to={`/article/${article.id}`} className={className}>{children}</Link>;
@@ -43,18 +54,19 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
   const TypeIcon = typeConfig.icon;
   const initial = categoryInitials[category] ?? "T";
   const bgClass = categoryBgClass[category] ?? "bg-tech";
+  const borderClass = categoryBorderClass[category] ?? "border-l-tech";
 
   return (
     <ArticleLink
       article={article}
-      className={`group block rounded-lg border border-border bg-card transition-colors hover:border-foreground/20 ${
+      className={`group block rounded-xl border border-border border-l-4 ${borderClass} bg-card transition-all duration-300 hover:border-foreground/20 hover:-translate-y-1 hover:shadow-lg ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
       {/* Thumbnail / colored initial block */}
-      <div className={`rounded-t-lg overflow-hidden ${featured ? "h-40" : "h-28"}`}>
+      <div className={`rounded-tr-xl overflow-hidden ${featured ? "h-40" : "h-28"}`}>
         {article.imageUrl ? (
-          <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover" />
+          <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
         ) : (
           <div className={`flex items-center justify-center w-full h-full ${bgClass}`}>
             <span className="text-5xl font-display font-black text-primary-foreground select-none">

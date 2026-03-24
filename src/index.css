@@ -58,6 +58,9 @@
     --card-shadow: none;
     --card-shadow-hover: none;
 
+    --hero-from: 220 16% 14%;
+    --hero-to: 217 19% 23%;
+
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
   }
