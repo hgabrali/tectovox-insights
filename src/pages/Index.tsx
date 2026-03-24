@@ -7,7 +7,7 @@ import { TopTenNews } from "@/components/TopTenNews";
 import { MorningBriefSection } from "@/components/MorningBrief";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
-import { useTopStories } from "@/hooks/use-top-stories";
+
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
