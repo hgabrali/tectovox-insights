@@ -6,7 +6,7 @@ import { FilterBar } from "@/components/FilterBar";
 import { categoryConfig, type Category } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 import { useContentFilters } from "@/hooks/use-content-filters";
-import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
+import { ArticleGridSkeleton, EmptyState, ErrorState, ResultCount } from "@/components/ContentStates";
 
 const TopicPage = () => {
   const location = useLocation();
