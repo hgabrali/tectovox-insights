@@ -58,6 +58,9 @@
     --card-shadow: none;
     --card-shadow-hover: none;
 
+    --hero-from: 220 16% 14%;
+    --hero-to: 217 19% 23%;
+
     --font-display: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
   }
@@ -129,5 +132,15 @@
   }
   .font-body {
     font-family: var(--font-body);
+  }
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, hsl(var(--hero-from)), hsl(var(--hero-to)));
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
