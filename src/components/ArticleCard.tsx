@@ -10,6 +10,7 @@ const categoryInitials: Record<Category, string> = {
   advertising: "A",
   ai: "AI",
   academia: "Ac",
+  "data-science": "DS",
 };
 
 const categoryBgClass: Record<Category, string> = {
