@@ -27,6 +27,10 @@ function truncate(text: string, max = 60) {
   return text.length > max ? text.slice(0, max) + "…" : text;
 }
 
+function truncateDomain(text: string, max = 20) {
+  return text.length > max ? text.slice(0, max) + "…" : text;
+}
+
 function TopSourcesSkeleton() {
   return (
     <section className="container py-10">
@@ -93,8 +97,9 @@ export function TopSourcesSection() {
               <YAxis
                 type="category"
                 dataKey="name"
-                width={160}
+                width={180}
                 tick={{ fontSize: 13, fill: "hsl(var(--foreground))" }}
+                tickFormatter={(v) => truncateDomain(v, 20)}
                 axisLine={false}
                 tickLine={false}
               />
