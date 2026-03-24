@@ -120,12 +120,7 @@ const Index = () => {
         {/* Morning Brief */}
         <MorningBriefSection />
 
-        {/* Top Story + Also Worth Reading */}
-        <TopStorySection
-          topStory={topStories[0] ?? null}
-          alsoWorthReading={topStories.slice(1)}
-          isLoading={isLoadingTop}
-        />
+
 
         {/* Category Pills */}
         <section className="border-b border-border bg-secondary/30">
