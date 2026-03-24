@@ -52,7 +52,10 @@ const TopicPage = () => {
 
         {/* Filters */}
         <div className="container pt-8 pb-4">
-          <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} />
+          <div className="flex items-baseline justify-between mb-4">
+            <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} />
+            {!isLoading && !isError && <ResultCount count={articles.length} />}
+          </div>
         </div>
 
         {/* Articles */}
