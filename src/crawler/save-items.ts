@@ -3,11 +3,12 @@ import { checkDuplicate } from "./deduplicator.js";
 import type { CrawledItem } from "./types.js";
 
 const PREMIUM_SOURCES = new Set([
-  "MIT",
-  "Stanford",
-  "DeepMind",
-  "Aeon",
-  "CJR",
+  "MIT Technology Review",
+  "MIT AI News",
+  "Stanford Online",
+  "DeepMind Blog",
+  "Aeon Magazine",
+  "Columbia Journalism Review",
   "Nieman Lab",
   "Distill.pub",
   "Fast.ai Blog",
@@ -16,8 +17,13 @@ const PREMIUM_SOURCES = new Set([
 const GOOD_SOURCES = new Set([
   "TechCrunch",
   "Wired",
+  "The Verge",
   "AdExchanger",
   "Press Gazette",
+  "Berkeley AI Research",
+  "Hugging Face Blog",
+  "The Gradient",
+  "Import AI",
   "Towards Data Science",
   "KDnuggets",
   "Kaggle Blog",
@@ -27,13 +33,15 @@ const GOOD_SOURCES = new Set([
   "Data School",
 ]);
 
-function getSourceQuality(sourceName: string): number {
+const DEPRIORITIZE_TITLE_PATTERNS = /breviary|choir|hymn|sheet music|choral|organ|piano/i;
+
+export function getSourceQuality(sourceName: string): number {
   if (PREMIUM_SOURCES.has(sourceName)) return 3;
   if (GOOD_SOURCES.has(sourceName)) return 2;
   return 1;
 }
 
-function getRecencyBonus(publishedAt: string): number {
+export function getRecencyBonus(publishedAt: string): number {
   const ageMs = Date.now() - new Date(publishedAt).getTime();
   const ageHours = ageMs / (1000 * 60 * 60);
   if (ageHours <= 2) return 5;
@@ -45,16 +53,39 @@ function getRecencyBonus(publishedAt: string): number {
 function getContentTypeBonus(contentType: string, sourceName: string): number {
   let bonus = 0;
   if (contentType === "video") bonus += 2;
-  if (contentType === "article" && PREMIUM_SOURCES.has(sourceName)) bonus += 1;
+  if (contentType === "news" && PREMIUM_SOURCES.has(sourceName)) bonus += 1;
   return bonus;
 }
 
-function calculateRelevanceScore(item: CrawledItem): { relevance_score: number; source_quality: number } {
+function getCategoryBonus(category: string): number {
+  if (category === "academia" || category === "ai") return 1;
+  return 0;
+}
+
+function shouldDeprioritize(title: string, category: string, contentType: string): boolean {
+  if (category === "academia" && contentType === "video" && DEPRIORITIZE_TITLE_PATTERNS.test(title)) {
+    return true;
+  }
+  return false;
+}
+
+export function calculateRelevanceScore(item: {
+  source_name: string;
+  published_at: string;
+  content_type: string;
+  topic: string;
+  title: string;
+}): { relevance_score: number; source_quality: number } {
+  if (shouldDeprioritize(item.title, item.topic, item.content_type)) {
+    return { relevance_score: 0, source_quality: 0 };
+  }
+
   const source_quality = getSourceQuality(item.source_name);
   const recencyBonus = getRecencyBonus(item.published_at);
   const contentTypeBonus = getContentTypeBonus(item.content_type, item.source_name);
+  const categoryBonus = getCategoryBonus(item.topic);
   return {
-    relevance_score: source_quality + recencyBonus + contentTypeBonus,
+    relevance_score: source_quality + recencyBonus + contentTypeBonus + categoryBonus,
     source_quality,
   };
 }
