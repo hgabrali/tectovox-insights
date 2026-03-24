@@ -3,11 +3,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ArticleCard } from "@/components/ArticleCard";
 import { FilterBar } from "@/components/FilterBar";
 import { TopTenNews } from "@/components/TopTenNews";
-import { TopStorySection } from "@/components/TopStory";
+
 import { MorningBriefSection } from "@/components/MorningBrief";
 import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
-import { useTopStories } from "@/hooks/use-top-stories";
+
 import { useContentFilters } from "@/hooks/use-content-filters";
 import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
@@ -64,7 +64,7 @@ const statCards = [
 const Index = () => {
   const { filters, setFilter, clearFilters, applyFilters } = useContentFilters();
   const { data: allItems = [], isLoading, isError, refetch } = useItems({ limit: 20, sortBy: filters.sort });
-  const { data: topStories = [], isLoading: isLoadingTop } = useTopStories();
+  
 
   const filtered = applyFilters(allItems);
 
@@ -120,12 +120,7 @@ const Index = () => {
         {/* Morning Brief */}
         <MorningBriefSection />
 
-        {/* Top Story + Also Worth Reading */}
-        <TopStorySection
-          topStory={topStories[0] ?? null}
-          alsoWorthReading={topStories.slice(1)}
-          isLoading={isLoadingTop}
-        />
+
 
         {/* Category Pills */}
         <section className="border-b border-border bg-secondary/30">
