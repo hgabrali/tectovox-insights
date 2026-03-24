@@ -9,7 +9,7 @@ import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 
 import { useContentFilters } from "@/hooks/use-content-filters";
-import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
+import { ArticleGridSkeleton, EmptyState, ErrorState, ResultCount } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import mascotImg from "@/assets/mascot-sitting.png";
@@ -151,7 +151,10 @@ const Index = () => {
 
         {/* Filters + Content Grid */}
         <section className="container py-12">
-          <h2 className="font-display text-3xl font-bold mb-8">Latest</h2>
+          <div className="flex items-baseline justify-between mb-8">
+            <h2 className="font-display text-3xl font-bold">Latest</h2>
+            {!isLoading && !isError && <ResultCount count={filtered.length} />}
+          </div>
           <FilterBar filters={filters} setFilter={setFilter} clearFilters={clearFilters} showCategoryFilter />
           <div className="mt-8">
             {isLoading ? (

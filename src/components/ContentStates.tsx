@@ -52,11 +52,28 @@ export function ArchiveListSkeleton({ count = 8 }: { count?: number }) {
   );
 }
 
+export function ResultCount({ count }: { count: number }) {
+  return (
+    <p className="text-sm text-muted-foreground transition-all duration-300">
+      <span className="inline-block tabular-nums font-semibold text-foreground transition-all duration-500">{count}</span>
+      {" "}{count === 1 ? "result" : "results"}
+    </p>
+  );
+}
+
 export function EmptyState({ message = "No content yet" }: { message?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <Inbox className="h-12 w-12 text-muted-foreground/30 mb-4" />
-      <p className="text-muted-foreground">{message}</p>
+    <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-in">
+      <div className="relative mb-6">
+        <div className="h-20 w-20 rounded-2xl bg-muted/50 flex items-center justify-center">
+          <Inbox className="h-10 w-10 text-muted-foreground/40" />
+        </div>
+        <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center">
+          <span className="text-[10px] text-primary font-bold">0</span>
+        </div>
+      </div>
+      <p className="text-muted-foreground font-medium">{message}</p>
+      <p className="mt-1 text-xs text-muted-foreground/60">Try adjusting your filters</p>
     </div>
   );
 }
