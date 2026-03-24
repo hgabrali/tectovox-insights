@@ -97,8 +97,9 @@ export function TopSourcesSection() {
               <YAxis
                 type="category"
                 dataKey="name"
-                width={160}
+                width={180}
                 tick={{ fontSize: 13, fill: "hsl(var(--foreground))" }}
+                tickFormatter={(v) => truncateDomain(v, 20)}
                 axisLine={false}
                 tickLine={false}
               />
