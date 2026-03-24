@@ -9,6 +9,8 @@ const PREMIUM_SOURCES = new Set([
   "Aeon",
   "CJR",
   "Nieman Lab",
+  "Distill.pub",
+  "Fast.ai Blog",
 ]);
 
 const GOOD_SOURCES = new Set([
@@ -16,6 +18,13 @@ const GOOD_SOURCES = new Set([
   "Wired",
   "AdExchanger",
   "Press Gazette",
+  "Towards Data Science",
+  "KDnuggets",
+  "Kaggle Blog",
+  "Data Science Weekly",
+  "StatQuest (Josh Starmer)",
+  "Sentdex",
+  "Data School",
 ]);
 
 function getSourceQuality(sourceName: string): number {
