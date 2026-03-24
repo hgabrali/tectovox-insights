@@ -9,7 +9,7 @@ import { categoryConfig } from "@/lib/data";
 import { useItems } from "@/hooks/use-items";
 
 import { useContentFilters } from "@/hooks/use-content-filters";
-import { ArticleGridSkeleton, EmptyState, ErrorState } from "@/components/ContentStates";
+import { ArticleGridSkeleton, EmptyState, ErrorState, ResultCount } from "@/components/ContentStates";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import mascotImg from "@/assets/mascot-sitting.png";
