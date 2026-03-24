@@ -12,6 +12,7 @@ const categoryBgClass: Record<Category, string> = {
   advertising: "bg-advertising",
   ai: "bg-ai",
   academia: "bg-academia",
+  "data-science": "bg-data-science",
 };
 
 const categoryInitials: Record<Category, string> = {
