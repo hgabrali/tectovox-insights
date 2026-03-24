@@ -80,14 +80,9 @@ const Index = () => {
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Dark Hero Section */}
-        <section className="relative overflow-hidden bg-hero-gradient">
-          {/* Geometric pattern overlay */}
-          <div className="absolute inset-0 opacity-[0.04]" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-
-          <div className="container relative pt-12 pb-14 md:pt-20 md:pb-20">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden">
+          <div className="container pt-12 pb-14 md:pt-20 md:pb-20">
             {/* Stat counters */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10 md:mb-14">
               {statCards.map((stat) => {
@@ -95,11 +90,11 @@ const Index = () => {
                 return (
                   <div
                     key={stat.label}
-                    className="group relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-5 md:px-6 md:py-6 text-center transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.3)]"
+                    className="group relative rounded-2xl border border-border bg-card px-4 py-5 md:px-6 md:py-6 text-center transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.2)]"
                   >
                     <Icon className="h-5 w-5 text-primary mx-auto mb-2 transition-transform duration-300 group-hover:scale-110" />
                     <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                    <p className="mt-1 text-xs md:text-sm font-medium text-white/50 uppercase tracking-wider">
+                    <p className="mt-1 text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       {stat.label}
                     </p>
                   </div>
@@ -108,16 +103,17 @@ const Index = () => {
             </div>
 
             {/* Main headline */}
-            <h1 className="font-display text-6xl font-black leading-[1.05] md:text-8xl lg:text-[100px] text-white">
+            <h1 className="font-display text-6xl font-black leading-[1.05] md:text-8xl lg:text-[100px] text-foreground">
               <span className="relative inline-block">T<img
                   src={mascotImg}
                   alt="tectovox mascot"
-                  className="absolute bottom-[55%] left-1/2 -translate-x-1/2 h-[56px] w-[56px] md:h-[80px] md:w-[80px] lg:h-[100px] lg:w-[100px] object-contain pointer-events-auto cursor-pointer z-10 rounded-xl bg-white p-1"
+                  className="absolute bottom-[55%] left-1/2 -translate-x-1/2 h-[56px] w-[56px] md:h-[80px] md:w-[80px] lg:h-[100px] lg:w-[100px] object-contain pointer-events-auto cursor-pointer z-10 mix-blend-multiply"
                 /></span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
             </h1>
-            <p className="mt-5 text-sm font-medium text-white/40 tracking-wider uppercase">
+            <p className="mt-5 text-sm font-medium text-muted-foreground tracking-wider uppercase">
               {dateStr}
             </p>
+            <div className="mt-8 h-px bg-border" />
           </div>
         </section>
 
