@@ -38,10 +38,17 @@ export function MorningBriefSection() {
 
   if (isLoading || !briefs || briefs.length === 0) return null;
 
-  const availableSessions = briefs.map((b) => b.session as Session);
+  const availableSessions = SESSION_ORDER.filter((s) =>
+    briefs.some((b) => b.session === s)
+  );
+
+  const ideal = getCurrentSession();
+  const defaultSession = availableSessions.includes(ideal)
+    ? ideal
+    : availableSessions[availableSessions.length - 1];
   const currentSession = activeSession && availableSessions.includes(activeSession)
     ? activeSession
-    : availableSessions[availableSessions.length - 1];
+    : defaultSession;
 
   const currentBrief = briefs.find((b) => b.session === currentSession);
   if (!currentBrief) return null;
