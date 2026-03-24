@@ -53,6 +53,20 @@ export const SOURCES: Source[] = [
     content_type: "news",
     maxItems: 15,
   },
+  {
+    name: "Medium (Tech)",
+    feedUrl: "https://medium.com/feed/tag/technology",
+    topic: "media",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "CNN Tech",
+    feedUrl: "http://rss.cnn.com/rss/edition_technology.rss",
+    topic: "media",
+    content_type: "news",
+    maxItems: 5,
+  },
   // Advertising
   {
     name: "AdExchanger",
@@ -68,6 +82,41 @@ export const SOURCES: Source[] = [
     topic: "technology",
     content_type: "news",
     maxItems: 10,
+  },
+  {
+    name: "ZDNET",
+    feedUrl: "https://www.zdnet.com/news/rss.xml",
+    topic: "technology",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "GeekWire",
+    feedUrl: "https://www.geekwire.com/feed/",
+    topic: "technology",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "The Register",
+    feedUrl: "https://www.theregister.com/headlines.atom",
+    topic: "technology",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "Heise.de (English)",
+    feedUrl: "https://www.heise.de/rss/heise-atom.xml",
+    topic: "technology",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "Ars Technica",
+    feedUrl: "https://feeds.arstechnica.com/arstechnica/index",
+    topic: "technology",
+    content_type: "news",
+    maxItems: 5,
   },
   // Philosophy
   {
@@ -133,6 +182,21 @@ export const SOURCES: Source[] = [
   {
     name: "Import AI",
     feedUrl: "https://jack-clark.net/feed/",
+    topic: "ai",
+    content_type: "news",
+    maxItems: 5,
+  },
+  {
+    name: "TLDR Tech",
+    feedUrl: "https://tldr.tech/api/articles/rss",
+    topic: "ai",
+    content_type: "news",
+    skipTitleLengthCheck: true,
+    maxItems: 5,
+  },
+  {
+    name: "Ben's Bites",
+    feedUrl: "https://www.bensbites.co/feed",
     topic: "ai",
     content_type: "news",
     maxItems: 5,
