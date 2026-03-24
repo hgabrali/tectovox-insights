@@ -112,8 +112,7 @@ const Index = () => {
               <span className="relative inline-block">T<img
                   src={mascotImg}
                   alt="tectovox mascot"
-                  className="absolute bottom-[55%] left-1/2 -translate-x-1/2 h-[56px] w-[56px] md:h-[80px] md:w-[80px] lg:h-[100px] lg:w-[100px] object-contain pointer-events-auto cursor-pointer z-10"
-                  style={{ filter: "brightness(1.2)" }}
+                  className="absolute bottom-[55%] left-1/2 -translate-x-1/2 h-[56px] w-[56px] md:h-[80px] md:w-[80px] lg:h-[100px] lg:w-[100px] object-contain pointer-events-auto cursor-pointer z-10 rounded-xl bg-white p-1"
                 /></span>ech. Media. <em className="not-italic font-display italic text-primary">Ideas.</em>
             </h1>
             <p className="mt-5 text-sm font-medium text-white/40 tracking-wider uppercase">
