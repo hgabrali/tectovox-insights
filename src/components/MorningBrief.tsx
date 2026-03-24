@@ -2,11 +2,20 @@ import { useState } from "react";
 import { Coffee, Sun, Moon } from "lucide-react";
 import { useDailyBriefs, type Session } from "@/hooks/use-morning-brief";
 
+const SESSION_ORDER: Session[] = ["morning", "afternoon", "evening"];
+
 const SESSION_META: Record<Session, { label: string; time: string; icon: typeof Coffee }> = {
   morning: { label: "Morning", time: "08:00", icon: Coffee },
   afternoon: { label: "Afternoon", time: "13:00", icon: Sun },
   evening: { label: "Evening", time: "19:00", icon: Moon },
 };
+
+function getCurrentSession(): Session {
+  const hour = new Date().getUTCHours();
+  if (hour < 13) return "morning";
+  if (hour < 19) return "afternoon";
+  return "evening";
+}
 
 function parseBold(text: string) {
   const parts = text.split(/\*\*(.*?)\*\*/g);
