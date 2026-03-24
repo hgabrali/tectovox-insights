@@ -12,6 +12,7 @@ const categoryBgClass: Record<Category, string> = {
   advertising: "bg-advertising",
   ai: "bg-ai",
   academia: "bg-academia",
+  "data-science": "bg-data-science",
 };
 
 const categoryInitials: Record<Category, string> = {
@@ -22,6 +23,7 @@ const categoryInitials: Record<Category, string> = {
   advertising: "A",
   ai: "AI",
   academia: "Ac",
+  "data-science": "DS",
 };
 
 function TopStoryLink({ article, children }: { article: Article; children: React.ReactNode }) {

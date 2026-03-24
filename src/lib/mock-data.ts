@@ -1,6 +1,6 @@
 import type { Article, Category, ContentType } from "./data";
 
-const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia"];
+const categories: Category[] = ["technology", "media", "communication", "philosophy", "advertising", "ai", "academia", "data-science"];
 const contentTypes: ContentType[] = ["article", "video", "podcast", "book"];
 
 const titles: Record<Category, string[]> = {
@@ -90,6 +90,14 @@ const titles: Record<Category, string[]> = {
     "Interdisciplinary Research: Breaking Down Departmental Silos",
     "Academic Freedom Under Pressure: A Global Survey",
   ],
+  "data-science": [
+    "How Feature Stores Are Becoming the Backbone of ML Pipelines",
+    "The Rise of DataOps: Bringing DevOps Practices to Data Teams",
+    "Causal Inference vs Correlation: Why It Matters for Business Decisions",
+    "Real-Time Analytics at Scale: Stream Processing Architectures",
+    "The Data Lakehouse Paradigm: Unifying Warehouses and Lakes",
+    "AutoML Is Democratizing Predictive Modeling Across Industries",
+  ],
 };
 
 const excerpts: Record<Category, string[]> = {
@@ -178,6 +186,14 @@ const excerpts: Record<Category, string[]> = {
     "Universities grapple with how to remain relevant as AI democratizes access to knowledge.",
     "Funding agencies increasingly reward cross-disciplinary collaboration, reshaping academic incentives.",
     "A comprehensive survey reveals growing threats to academic freedom across multiple continents.",
+  ],
+  "data-science": [
+    "Feature stores centralize feature engineering, enabling consistent model training and serving at enterprise scale.",
+    "DataOps practices are reducing data pipeline failures and accelerating time-to-insight for analytics teams.",
+    "New causal inference frameworks help businesses distinguish genuine drivers from spurious correlations.",
+    "Stream processing engines like Flink and Kafka Streams are enabling sub-second analytics on massive data volumes.",
+    "The data lakehouse architecture promises to eliminate the complexity of maintaining separate lakes and warehouses.",
+    "AutoML platforms are enabling domain experts without ML backgrounds to build production-grade predictive models.",
   ],
 };
 

@@ -1,4 +1,4 @@
-import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, Sparkles, GraduationCap, LucideIcon } from "lucide-react";
+import { Cpu, Tv, MessageCircle, BookOpen, Megaphone, Newspaper, Play, AudioLines, BookMarked, Sparkles, GraduationCap, BarChart2, LucideIcon } from "lucide-react";
 
 export type ContentType = "article" | "video" | "podcast" | "book";
 
@@ -17,7 +17,7 @@ export interface Article {
   isBriefing?: boolean;
 }
 
-export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising" | "ai" | "academia";
+export type Category = "technology" | "media" | "communication" | "philosophy" | "advertising" | "ai" | "academia" | "data-science";
 
 export const contentTypeConfig: Record<ContentType, { label: string; icon: LucideIcon; color: string }> = {
   article: {
@@ -84,5 +84,11 @@ export const categoryConfig: Record<Category, { label: string; color: string; ic
     color: "bg-academia/10 text-academia border-academia/20",
     icon: GraduationCap,
     description: "Highlighting research, scholarly discourse, and the evolving landscape of higher education and knowledge production.",
+  },
+  "data-science": {
+    label: "Data Science",
+    color: "bg-data-science/10 text-data-science border-data-science/20",
+    icon: BarChart2,
+    description: "Exploring data analytics, machine learning pipelines, statistical modeling, and the tools transforming raw data into actionable insights.",
   },
 };

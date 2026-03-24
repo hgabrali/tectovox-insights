@@ -22,6 +22,7 @@ const categoryBorder: Record<Category, string> = {
   advertising: "border-l-advertising",
   ai: "border-l-ai",
   academia: "border-l-academia",
+  "data-science": "border-l-data-science",
 };
 
 export function TopTenNews({ items, isLoading = false }: { items: Article[]; isLoading?: boolean }) {
