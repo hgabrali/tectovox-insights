@@ -120,6 +120,8 @@ const Index = () => {
         {/* Morning Brief */}
         <MorningBriefSection />
 
+        {/* Top Sources This Week */}
+        <TopSourcesSection />
 
 
         {/* Category Pills */}
